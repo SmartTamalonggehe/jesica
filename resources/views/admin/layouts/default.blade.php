@@ -63,10 +63,8 @@
         <!-- /main content -->
 
     </div>
-    <!-- /page content -->
-    <script src="{{ mix('my_code/js/app.js') }}"></script>
-    <script src="{{ mix('my_code/js/components.js') }}" defer></script>
-    @yield('scripts')
+
+    @include('admin.layouts.scripts')
 </body>
 
 </html>

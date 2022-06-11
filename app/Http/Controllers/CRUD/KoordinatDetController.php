@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\CRUD;
 
-use App\Http\Controllers\Controller;
+use App\Models\KoordinatDet;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class KoordinatDetController extends Controller
 {
@@ -33,9 +34,16 @@ class KoordinatDetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $longitude = $request->longitude;
+        foreach ($longitude as $key => $value) {
+            KoordinatDet::create([
+                'koordinat_id' => $id,
+                'longitude' => $request->longitude[$key],
+                'latitude' => $request->latitude[$key]
+            ]);
+        }
     }
 
     /**

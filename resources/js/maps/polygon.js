@@ -1,72 +1,107 @@
 import map, { div_map } from "./init";
 
+import { getDataPolygon } from "./../getData";
+
+const list_koordinat = document.getElementById("list-koordinat");
+
 div_map.style.height = "80vh";
-map.setCenter([-68.137343, 45.137451]);
-map.setZoom(5);
+map.setCenter([140.69375187626062, -2.5605874902233956]);
+map.setZoom(11);
 map.setStyle("mapbox://styles/mapbox/satellite-streets-v11");
 
-const showPolygon = () => {
-    map.on("load", () => {
-        // Add a data source containing GeoJSON data.
-        map.addSource("maine", {
-            type: "geojson",
-            data: {
+map.on("load", () => {
+    showPolygon();
+});
+const showPolygon = async () => {
+    const data = await getDataPolygon();
+    let coordinates = [];
+    const features = [];
+
+    // if data exist
+    if (data.length > 0) {
+        data.forEach((coord) => {
+            coord.koordinat.koordinat_det.forEach((element) => {
+                coordinates.push([element.longitude, element.latitude]);
+            });
+            features.push({
                 type: "Feature",
+                properties: {
+                    id: coord.id,
+                    // name: coord.nama,
+                    // ket: coord.ket,
+                    // meter: coord.meter,
+                    color: coord.warna, //coord.warna, //rgba(255, 0, 114, 0.24)
+                },
                 geometry: {
                     type: "Polygon",
-                    // These coordinates outline Maine.
-                    coordinates: [
-                        [
-                            [-67.13734, 45.13745],
-                            [-66.96466, 44.8097],
-                            [-68.03252, 44.3252],
-                            [-69.06, 43.98],
-                            [-70.11617, 43.68405],
-                            [-70.64573, 43.09008],
-                            [-70.75102, 43.08003],
-                            [-70.79761, 43.21973],
-                            [-70.98176, 43.36789],
-                            [-70.94416, 43.46633],
-                            [-71.08482, 45.30524],
-                            [-70.66002, 45.46022],
-                            [-70.30495, 45.91479],
-                            [-70.00014, 46.69317],
-                            [-69.23708, 47.44777],
-                            [-68.90478, 47.18479],
-                            [-68.2343, 47.35462],
-                            [-67.79035, 47.06624],
-                            [-67.79141, 45.70258],
-                            [-67.13734, 45.13745],
-                        ],
-                    ],
+                    coordinates: [coordinates],
                 },
-            },
+            });
+            coordinates = [];
         });
+    }
 
-        // Add a new layer to visualize the polygon.
-        map.addLayer({
-            id: "maine",
-            type: "fill",
-            source: "maine", // reference the data source
-            layout: {},
-            paint: {
-                "fill-color": "#0080ff", // blue color fill
-                "fill-opacity": 0.5,
-            },
-        });
-        // Add a black outline around the polygon.
-        map.addLayer({
-            id: "outline",
-            type: "line",
-            source: "maine",
-            layout: {},
-            paint: {
-                "line-color": "#000",
-                "line-width": 3,
-            },
-        });
+    // Add a source for the state polygons.
+    map.addSource("area", {
+        type: "geojson",
+        data: {
+            type: "FeatureCollection",
+            features,
+        },
+    });
+
+    // Add a layer showing the state polygons.
+    map.addLayer({
+        id: "area-layer",
+        type: "fill",
+        source: "area",
+        paint: {
+            "fill-color": ["get", "color"],
+            "fill-opacity": 0.8,
+        },
     });
 };
+
+// When a click event occurs on a feature in the area layer,
+// open a popup at the location of the click, with description
+// HTML from the click event's properties.
+map.on("click", "area-layer", (e) => {
+    let show = e.features[0].properties;
+    console.log(show);
+    // if (tools.route == "batu_gamping") {
+    //     show = `${e.features[0].properties.ket}, ${e.features[0].properties.meter} meter`;
+    // }
+    new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(map);
+});
+
+// Change the cursor to a pointer when
+// the mouse is over the area layer.
+map.on("mouseenter", "area-layer", () => {
+    map.getCanvas().style.cursor = "pointer";
+});
+
+// Change the cursor back to a pointer
+// when it leaves the area layer.
+map.on("mouseleave", "area-layer", () => {
+    map.getCanvas().style.cursor = "";
+});
+// when mouse double click
+map.on("contextmenu", "area-layer", (e) => {
+    const href = e.features[0].properties.id;
+    console.log(href);
+});
+
+// refresh all data
+const refresh = document.getElementById("refresh");
+
+refresh.addEventListener("click", () => {
+    console.log("remove layer");
+    map.removeLayer("area-layer");
+    map.removeSource("area");
+    setTimeout(() => {
+        showPolygon();
+    }, 500);
+});
 
 const drawPolygon = () => {
     const draw = new MapboxDraw({
@@ -78,7 +113,6 @@ const drawPolygon = () => {
         },
         // Set mapbox-gl-draw to draw by default.
         // The user does not have to click the polygon control button first.
-        defaultMode: "draw_polygon",
     });
     map.addControl(draw);
 
@@ -88,12 +122,21 @@ const drawPolygon = () => {
 
     function updateArea(e) {
         const data = draw.getAll();
-        const answer = document.getElementById("calculated-area");
         if (data.features.length > 0) {
             const area = turf.area(data);
-            // Restrict the area to 2 decimal points.
-            const rounded_area = Math.round(area * 100) / 100;
-            console.log(rounded_area);
+            // area to kilometers
+            const areaKm = area / 1000;
+            // round to 2 decimals
+            const areaKmRounded = Math.round(areaKm * 100) / 100;
+            // select id tambah
+            const tambah = document.getElementById("tambah");
+            // tambah click
+            tambah.click();
+            const luas = document.getElementById("luas");
+            luas.value = areaKmRounded;
+
+            inputKoordinat(e.features[0].geometry.coordinates[0], draw);
+            console.log(e.features[0].geometry.coordinates[0]);
         } else {
             if (e.type !== "draw.delete")
                 alert("Click the map to draw a polygon.");
@@ -101,5 +144,22 @@ const drawPolygon = () => {
     }
 };
 
-showPolygon();
+const inputKoordinat = (data, draw) => {
+    list_koordinat.innerHTML = "";
+    data.forEach((item) => {
+        list_koordinat.innerHTML += `<div class="col-6 mt-2 animate__animated animate__bounceInDown">
+                                        <label for="longitude">Longitude</label>
+                                        <input type="text" value="${item[0]}" class="form-control inputReset" name="longitude[]" id="longitude"
+                                            required />
+                                    </div>
+                                    <div class="col-6 mt-2 animate__animated animate__bounceInDown">
+                                        <label for="latitude">Latitude</label>
+                                        <input type="text" value="${item[1]}" class="form-control inputReset" name="latitude[]" id="latitude"
+                                            required />
+                                    </div>`;
+    });
+    draw.deleteAll();
+};
+
+// showPolygon();
 drawPolygon();

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('koordinat_id')->constrained('koordinat')->onDelete('cascade')->onDelete('cascade');
             $table->string('nm_polygon', 120);
             $table->string('warna', 50);
-            $table->decimal('luas', 10, 7);
+            $table->decimal('luas', 15, 2);
             $table->timestamps();
         });
     }

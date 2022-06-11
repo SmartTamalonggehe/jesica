@@ -1,8 +1,11 @@
 const tools = require("./tools");
+const Toastify = require("toastify-js");
+const axios = require("axios");
 
-import * as costumeForm from "./costumeForm";
+import validKoordinat from "./../components/valid_koordinat";
 
-import Toastify from "toastify-js";
+const list_koordinat = document.getElementById("list-koordinat");
+const refresh = document.getElementById("refresh");
 
 function tampilForm() {
     document.getElementById("judul_form").innerText = "From Tambah Data";
@@ -21,6 +24,7 @@ if (btnTambah) {
             costumeForm.formPolygon();
         }
         tampilForm();
+        list_koordinat.innerHTML = "";
         tools.save_method = "add";
         $("#id").val("");
         $(".inputReset").val("");
@@ -31,6 +35,11 @@ if (btnTambah) {
 function formBiasa() {
     $("#formKu").on("submit", function (e) {
         e.preventDefault();
+        const cekValid = validKoordinat();
+        if (!cekValid) {
+            return 0;
+        }
+
         let id = $("#id").val();
         let dataKu = $("#formKu").serialize();
         let url;
@@ -43,29 +52,38 @@ function formBiasa() {
             url = url.replace(":id", id);
             method = "PUT";
         }
-        $.ajax({
+        axios({
+            method: method,
             url: url,
-            type: method,
             data: dataKu,
-            success: function (response) {
-                toastr[response.type](response.pesan, response.judul);
-                if (response.type !== "error") {
-                    $("#id").val("");
-                    $(".inputReset").val("");
-                    let oTable = $("#my_table").dataTable();
-                    oTable.fnDraw(false);
-                    $(".selectReset").val("").trigger("change");
-                    // setTimeOut for reloading page
-                    setTimeout(function () {
-                        location.reload();
-                    }, 1000);
-                }
-                if (tools.save_method == "Ubah") {
-                    $(".tampilModal").modal("hide");
-                }
-            },
-        }).fail(function (res) {
-            console.log(res);
+        }).then(function (response) {
+            const backgroundColor =
+                response.data.type === "error"
+                    ? "red"
+                    : "linear-gradient(to right, #00b09b, #96c93d)";
+            Toastify({
+                text: `${response.data.pesan}`,
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+                backgroundColor,
+                stopOnFocus: true,
+                onClick: function () {
+                    console.log("Toastify Click");
+                },
+            }).showToast();
+            if (response.data.type === "error") {
+                return 0;
+            }
+            refresh ? refresh.click() : "";
+            // reset form
+            $("#formKu").trigger("reset");
+            $(".selectReset").val("").trigger("change");
+            list_koordinat.innerHTML = "";
+            if (tools.save_method == "Ubah") {
+                $(".tampilModal").modal("hide");
+            }
         });
     });
 }
@@ -90,15 +108,7 @@ function formGambar() {
             cache: false,
             processData: false,
             success: function (response) {
-                Toastify({
-                    text: "This is a toast",
-                    className: "info",
-                    style: {
-                        background:
-                            "linear-gradient(to right, #00b09b, #96c93d)",
-                    },
-                }).showToast();
-
+                toastr[response.type](response.pesan, response.judul);
                 if (response.type === "error") {
                     return 0;
                 }

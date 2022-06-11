@@ -52,8 +52,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.peta') }}" class="nav-link"><i class="icon-width"></i>
-                        <span>Peta</span>
+                    <a href="{{ route('admin.polygon') }}" class="nav-link"><i class="icon-width"></i>
+                        <span>Polygon</span>
                     </a>
                 </li>
                 <li class="nav-item nav-item-submenu">

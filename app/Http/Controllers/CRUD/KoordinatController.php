@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\CRUD;
 
-use App\Http\Controllers\Controller;
+use App\Models\Koordinat;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class KoordinatController extends Controller
 {
@@ -35,7 +36,10 @@ class KoordinatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $koordinat = Koordinat::create([
+            'nm_koordinat' => $request->nm_polygon,
+        ]);
+        return $koordinat;
     }
 
     /**

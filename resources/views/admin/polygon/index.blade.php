@@ -1,7 +1,7 @@
 @extends('admin.layouts.default')
 
 @php
-$folder = 'peta';
+$folder = 'polygon';
 @endphp
 
 @section('css')
@@ -21,14 +21,16 @@ $folder = 'peta';
 @section('judul', ucfirst($folder))
 
 @section('btn-top-right')
-    <button type="button" class="btn btn-outline-primary float-end" id="tambah">Tambah Data</button>
+    <button type="button" class="btn btn-outline-primary" id="tambah">Tambah
+        Data</button>
 @endsection
 
 @section('content')
     <div id="route" style="display: none"><?= $folder ?></div>
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title">Peta</h5>
+            <h5 class="card-title">Polygon</h5>
+            <button id="refresh">Refresh</button>
         </div>
 
         <div class="card-body">

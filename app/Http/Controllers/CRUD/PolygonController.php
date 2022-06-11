@@ -2,11 +2,35 @@
 
 namespace App\Http\Controllers\CRUD;
 
-use App\Http\Controllers\Controller;
+use App\Models\Polygon;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class PolygonController extends Controller
 {
+    // validation
+    protected function spartaValidation($request, $id = "")
+    {
+        $validator = Validator::make($request, [
+            'nm_polygon' => 'required',
+            'warna' => 'required',
+            'luas' => 'required',
+            // minumum array
+            'longitude' => 'required|min:3',
+            'latitude' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $pesan = [
+                'judul' => 'Gagal',
+                'pesan' => $validator->errors()->first(),
+                'type' => 'error'
+            ];
+            return response()->json($pesan);
+        }
+    }
+    /**
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +38,7 @@ class PolygonController extends Controller
      */
     public function index()
     {
-        //
+        return 'test';
     }
 
     /**
@@ -35,7 +59,23 @@ class PolygonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $validate = $this->spartaValidation($data);
+        if ($validate) {
+            return $validate;
+        }
+        $koordinat = (new KoordinatController)->store($request);
+        $koordinat_det = (new KoordinatDetController)->store($request, $koordinat->id);
+        // all request except latitude and longitude
+        $data = $request->except(['longitude', 'latitude']);
+        $data['koordinat_id'] = $koordinat->id;
+        $polygon = Polygon::create($data);
+        $pesan = [
+            'judul' => 'Berhasil',
+            'pesan' => 'Data Telah Ditambahkan',
+            'type' => 'success'
+        ];
+        return response()->json($pesan);
     }
 
     /**
