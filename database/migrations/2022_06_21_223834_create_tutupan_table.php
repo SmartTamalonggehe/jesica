@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('koordinat', function (Blueprint $table) {
+        Schema::create('tutupan', function (Blueprint $table) {
             $table->id();
-            $table->string('nm_koordinat');
+            $table->string('nm_tutupan', 100);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('koordinat');
+        Schema::dropIfExists('tutupan');
     }
 };
