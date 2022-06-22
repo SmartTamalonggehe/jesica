@@ -1,6 +1,6 @@
-@import "toastify-js/src/toastify.css";
 @import "~select2/dist/css/select2.css";
 @import "animate.css";
+@import "toastr";
 
 @import "./myStyle.css";
 @import "./lightbox.css";

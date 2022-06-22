@@ -1,7 +1,7 @@
 @extends('admin.layouts.default')
 
 @php
-$folder = 'polygon';
+$folder = 'kawasan';
 @endphp
 
 @section('css')

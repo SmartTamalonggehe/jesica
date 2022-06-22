@@ -52,6 +52,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.tutupan') }}" class="nav-link"><i class="icon-width"></i>
+                        <span>Tutupan</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.polygon') }}" class="nav-link"><i class="icon-width"></i>
                         <span>Polygon</span>
                     </a>
