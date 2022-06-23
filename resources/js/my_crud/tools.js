@@ -1,7 +1,6 @@
 // toastr
 import toastr from "toastr";
 
-const route = document.getElementById("route").textContent;
 let save_method;
 
 const setSaveMethod = (set) => {
@@ -26,4 +25,4 @@ toastr.options = {
     hideMethod: "fadeOut",
 };
 
-export { toastr, route, save_method, setSaveMethod };
+export { toastr, save_method, setSaveMethod };

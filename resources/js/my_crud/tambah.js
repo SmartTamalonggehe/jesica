@@ -1,5 +1,6 @@
 import axios from "axios";
-import { toastr, route, save_method, setSaveMethod } from "./tools";
+import { list_koordinat, refreshMap } from "../maps/polygon";
+import { toastr, save_method, setSaveMethod } from "./tools";
 console.log("route", route);
 
 const btn_tambah = document.getElementById("tambah");
@@ -25,17 +26,24 @@ const resetForm = () => {
     if (save_method !== "tambah") {
         $(".tampilModal").modal("hide");
     }
+    if (list_koordinat) {
+        list_koordinat.innerHTML = "";
+    }
 };
 
 // submit form
 document.getElementById("formKu").addEventListener("submit", function (e) {
     e.preventDefault();
-    const formData = new FormData(this);
+    // get data from form with serialize
+    const formData = $(this).serialize();
+    const data = formData;
+
     // get data from form
-    const data = {};
-    formData.forEach(function (value, key) {
-        data[key] = value;
-    });
+    // const formData = new FormData(this);
+    // data={}
+    // formData.forEach(function (value, key) {
+    //     data[key] = value;
+    // });
 
     let method;
     let url;
@@ -53,11 +61,20 @@ document.getElementById("formKu").addEventListener("submit", function (e) {
         data,
     })
         .then(function (response) {
+            // return console.log("response", response);
             toastr[response.data.type](
                 response.data.pesan,
                 response.data.judul
             );
+            if (response.data.type === "error") {
+                return;
+            }
             resetForm();
+            if (route == "kawasan") {
+                const btn_refresh = document.getElementById("refresh");
+                btn_refresh.click();
+                return;
+            }
             let oTable = $("#my_table").dataTable();
             oTable.fnDraw(false);
         })
@@ -65,3 +82,5 @@ document.getElementById("formKu").addEventListener("submit", function (e) {
             console.log(error);
         });
 });
+
+export { resetForm };

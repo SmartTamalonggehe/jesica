@@ -1,4 +1,4 @@
-import { route, setSaveMethod } from "./tools";
+import { setSaveMethod } from "./tools";
 
 $(document).on("click", ".btn-ubah", function (e) {
     e.preventDefault();

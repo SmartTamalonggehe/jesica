@@ -49,7 +49,7 @@ $folder = 'tutupan';
                 order: [
                     [1, 'asc']
                 ],
-                ajax: `/crud/${route.textContent}`,
+                ajax: `/crud/${route}`,
                 columns: [{
                         data: 'DT_RowIndex',
                         orderable: false,

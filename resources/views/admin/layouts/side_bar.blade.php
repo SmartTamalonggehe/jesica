@@ -57,6 +57,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.kawasan') }}" class="nav-link"><i class="icon-width"></i>
+                        <span>Kawasan</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.polygon') }}" class="nav-link"><i class="icon-width"></i>
                         <span>Polygon</span>
                     </a>

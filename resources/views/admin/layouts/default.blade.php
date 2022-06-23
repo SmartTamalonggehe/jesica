@@ -64,6 +64,10 @@
 
     </div>
 
+    <script>
+        const route = document.getElementById('route').textContent;
+    </script>
+
     @include('admin.layouts.scripts')
 </body>
 

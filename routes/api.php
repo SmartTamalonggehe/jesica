@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\KawasanAPI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\PolygonAPI;
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('polygon', [PolygonAPI::class, 'index'])->name('polygon.index');
+Route::get('kawasan', [KawasanAPI::class, 'index'])->name('kawasan.index');

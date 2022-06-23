@@ -34,10 +34,11 @@ class KoordinatController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($request)
     {
         $koordinat = Koordinat::create([
-            'nm_koordinat' => $request->nm_polygon,
+            'nm_koordinat' => $request['nm_koordinat'],
+            'jenis' => $request['jenis'],
         ]);
         return $koordinat;
     }

@@ -9,13 +9,14 @@
              </div>
              <form id="formKu" class="tooltip-end-top">
                  @csrf
-                 <input type="hidden" name="id" id="id">
+                 <input type="hidden" class="inputReset" name="id_form" id="id_form">
+                 <input type="hidden" name="jenis" id="jenis" value="polygon">
                  <div class="modal-body">
                      <div class="row">
                          <div class="col-12">
                              <div class="mb-3">
-                                 <label for="nm_polygon">Nama Polygon</label>
-                                 <input type="text" class="form-control inputReset" name="nm_polygon" id="nm_polygon"
+                                 <label for="nm_kawasan">Nama Kawasan</label>
+                                 <input type="text" class="form-control inputReset" name="nm_kawasan" id="nm_kawasan"
                                      required />
                              </div>
                          </div>
@@ -29,7 +30,8 @@
                          <div class="col-9">
                              <div class="mb-3">
                                  <label for="luas">Luas</label>
-                                 <input type="text" class="form-control inputReset" name="luas" id="luas" required />
+                                 <input type="text" class="form-control inputReset" name="luas" id="luas"
+                                     required />
                              </div>
                          </div>
                          <div class="col-12" class="mb-3">

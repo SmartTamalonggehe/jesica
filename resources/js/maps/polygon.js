@@ -1,6 +1,7 @@
 import map, { div_map } from "./init";
 
 import { getDataPolygon } from "./../getData";
+import swalDelete from "../my_crud/hapus";
 
 const list_koordinat = document.getElementById("list-koordinat");
 
@@ -26,10 +27,9 @@ const showPolygon = async () => {
             features.push({
                 type: "Feature",
                 properties: {
-                    id: coord.id,
-                    // name: coord.nama,
-                    // ket: coord.ket,
-                    // meter: coord.meter,
+                    id: coord.koordinat.id,
+                    nm_kawasan: coord.nm_kawasan,
+                    luas: coord.luas,
                     color: coord.warna, //coord.warna, //rgba(255, 0, 114, 0.24)
                 },
                 geometry: {
@@ -66,11 +66,12 @@ const showPolygon = async () => {
 // open a popup at the location of the click, with description
 // HTML from the click event's properties.
 map.on("click", "area-layer", (e) => {
-    let show = e.features[0].properties;
+    const item = e.features[0].properties;
+    let show = "";
     console.log(show);
-    // if (tools.route == "batu_gamping") {
-    //     show = `${e.features[0].properties.ket}, ${e.features[0].properties.meter} meter`;
-    // }
+    if (route == "kawasan") {
+        show = `${item.nm_kawasan}, ${item.luas} ha`;
+    }
     new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(map);
 });
 
@@ -88,20 +89,21 @@ map.on("mouseleave", "area-layer", () => {
 // when mouse double click
 map.on("contextmenu", "area-layer", (e) => {
     const href = e.features[0].properties.id;
-    console.log(href);
+    swalDelete(href);
+});
+const btn_refresh = document.getElementById("refresh");
+btn_refresh.addEventListener("click", () => {
+    refreshMap();
 });
 
-// refresh all data
-const refresh = document.getElementById("refresh");
-
-refresh.addEventListener("click", () => {
+const refreshMap = () => {
     console.log("remove layer");
     map.removeLayer("area-layer");
     map.removeSource("area");
     setTimeout(() => {
         showPolygon();
     }, 500);
-});
+};
 
 const drawPolygon = () => {
     const draw = new MapboxDraw({
@@ -163,3 +165,5 @@ const inputKoordinat = (data, draw) => {
 
 // showPolygon();
 drawPolygon();
+
+export { refreshMap, list_koordinat };

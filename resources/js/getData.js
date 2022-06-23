@@ -2,8 +2,9 @@ import axios from "axios";
 
 const getDataPolygon = () => {
     return axios
-        .get("/api/polygon")
+        .get(`/api/${route}`)
         .then((res) => {
+            console.log(res.data);
             return res.data;
         })
         .catch((err) => {

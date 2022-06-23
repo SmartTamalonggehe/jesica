@@ -27,10 +27,10 @@ $folder = 'kawasan';
 
 @section('content')
     <div id="route" style="display: none"><?= $folder ?></div>
+    <button id="refresh" style="display: none">Refresh</button>
     <div class="card">
         <div class="card-header">
             <h5 class="card-title">Polygon</h5>
-            <button id="refresh">Refresh</button>
         </div>
 
         <div class="card-body">

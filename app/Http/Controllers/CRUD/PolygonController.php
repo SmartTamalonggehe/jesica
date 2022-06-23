@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CRUD;
 use App\Models\Polygon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Koordinat;
 use Illuminate\Support\Facades\Validator;
 
 class PolygonController extends Controller
@@ -120,6 +121,12 @@ class PolygonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Koordinat::destroy($id);
+        $pesan = [
+            'judul' => 'Berhasil',
+            'pesan' => 'Data Telah Dihapus',
+            'type' => 'success'
+        ];
+        return response()->json($pesan);
     }
 }
