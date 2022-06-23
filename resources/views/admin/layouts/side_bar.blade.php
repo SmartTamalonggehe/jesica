@@ -8,8 +8,8 @@
             <div class="sidebar-section-body">
                 <div class="media">
                     <a href="#" class="mr-3">
-                        <img src="../../../../global_assets/images/placeholders/placeholder.jpg" class="rounded-circle"
-                            alt="">
+                        <img src="{{ asset('global_assets/images/placeholders/placeholder.jpg') }}"
+                            class="rounded-circle" alt="">
                     </a>
 
                     <div class="media-body">
@@ -35,7 +35,6 @@
         </div>
         <!-- /user menu -->
 
-
         <!-- Main navigation -->
         <div class="sidebar-section">
             <ul class="nav nav-sidebar" data-nav-type="accordion">
@@ -51,21 +50,29 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.tutupan') }}" class="nav-link"><i class="icon-width"></i>
-                        <span>Tutupan</span>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('admin.kawasan') }}" class="nav-link"><i class="icon-width"></i>
                         <span>Kawasan</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
+                    <a href="{{ route('admin.tutupan') }}" class="nav-link"><i class="icon-width"></i>
+                        <span>Tutupan</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.kawasan-tutupan') }}" class="nav-link"><i class="icon-width"></i>
+                        <span>Kawasan Tutupan</span>
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
                     <a href="{{ route('admin.polygon') }}" class="nav-link"><i class="icon-width"></i>
                         <span>Polygon</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <!-- /main navigation -->

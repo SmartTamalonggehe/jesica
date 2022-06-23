@@ -4,6 +4,7 @@ use App\Http\Controllers\API\KawasanAPI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\PolygonAPI;
+use App\Http\Controllers\API\TutupanAPI;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('polygon', [PolygonAPI::class, 'index'])->name('polygon.index');
-Route::get('kawasan', [KawasanAPI::class, 'index'])->name('kawasan.index');
+
+Route::controller(KawasanAPI::class)->prefix('kawasan')->group(function () {
+    Route::get('/', 'index')->name('kawasan.index');
+    Route::get('polygon', 'polygon')->name('kawasan.polygon');
+});
+
+Route::get('tutupan', [TutupanAPI::class, 'index'])->name('tutupan.index');

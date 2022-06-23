@@ -20,6 +20,10 @@ Route::prefix('admin')->group(function () {
     Route::get('tutupan', function () {
         return view('admin.tutupan.index');
     })->name($nm . '.tutupan');
+    // route kawasan tutupan
+    Route::get('kawasan-tutupan', function () {
+        return view('admin.kawasan-tutupan.index');
+    })->name($nm . '.kawasan-tutupan');
     // route peta
     Route::get('polygon', function () {
         return view('admin.polygon.index');

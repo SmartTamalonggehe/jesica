@@ -3,17 +3,17 @@ const mix = require("laravel-mix");
 mix.disableSuccessNotifications();
 
 // mix browser sync
-mix.browserSync({
-    proxy: "http://localhost:8000",
-    files: [
-        "resources/views/**/*.blade.php",
-        "resources/js/**/*.js",
-        "resources/css/**/*.css",
-        "resources/assets/js/**/*.js",
-        "resources/assets/css/**/*.css",
-        "resources/assets/img/**/*.{png,jpg,gif,svg,webp}",
-    ],
-});
+// mix.browserSync({
+//     proxy: "http://localhost:8000",
+//     files: [
+//         "resources/views/**/*.blade.php",
+//         "resources/js/**/*.js",
+//         "resources/css/**/*.css",
+//         "resources/assets/js/**/*.js",
+//         "resources/assets/css/**/*.css",
+//         "resources/assets/img/**/*.{png,jpg,gif,svg,webp}",
+//     ],
+// });
 
 /*
  |--------------------------------------------------------------------------

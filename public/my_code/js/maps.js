@@ -2165,14 +2165,34 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getDataPolygon": () => (/* binding */ getDataPolygon)
+/* harmony export */   "getDataKawasan": () => (/* binding */ getDataKawasan),
+/* harmony export */   "getDataPolygon": () => (/* binding */ getDataPolygon),
+/* harmony export */   "getDataTutupan": () => (/* binding */ getDataTutupan)
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 
 var getDataPolygon = function getDataPolygon() {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/".concat(route)).then(function (res) {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/".concat(route, "/polygon")).then(function (res) {
+    console.log(res.data);
+    return res.data;
+  })["catch"](function (err) {
+    console.log(err);
+  });
+};
+
+var getDataKawasan = function getDataKawasan() {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/kawasan").then(function (res) {
+    console.log(res.data);
+    return res.data;
+  })["catch"](function (err) {
+    console.log(err);
+  });
+};
+
+var getDataTutupan = function getDataTutupan() {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/tutupan").then(function (res) {
     console.log(res.data);
     return res.data;
   })["catch"](function (err) {
@@ -2435,11 +2455,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./resources/js/my_crud/tools.js");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _maps_polygon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../maps/polygon */ "./resources/js/maps/polygon.js");
 
 
-
- // click body selector btn-hapus
+ // import { refreshMap } from "../maps/polygon";
+// click body selector btn-hapus
 
 $(document).on("click", ".btn-hapus", function (e) {
   e.preventDefault();
@@ -2463,7 +2482,8 @@ var swalDelete = function swalDelete(href) {
         _tools__WEBPACK_IMPORTED_MODULE_1__.toastr[response.data.type](response.data.pesan, response.data.judul);
 
         if (route == "kawasan") {
-          (0,_maps_polygon__WEBPACK_IMPORTED_MODULE_3__.refreshMap)();
+          var btn_refresh = document.getElementById("refresh");
+          btn_refresh.click();
           return;
         }
 

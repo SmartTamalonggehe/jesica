@@ -10,6 +10,12 @@ class KawasanAPI extends Controller
 {
     public function index()
     {
+        $data = Kawasan::orderBy('nm_kawasan')->get();
+        return response()->json($data);
+    }
+
+    public function polygon()
+    {
         $data = Kawasan::with(['koordinat' => function ($koordinat) {
             $koordinat->with('koordinatDet');
         }])->get();

@@ -10,6 +10,9 @@ try {
     $(".select2_basic").select2({
         tags: true,
         dropdownParent: $(".tampilModal"),
+        width: "100%",
+        placeholder: "Pilih",
+        theme: "bootstrap",
     });
     // require("bootstrap");
 } catch (e) {}

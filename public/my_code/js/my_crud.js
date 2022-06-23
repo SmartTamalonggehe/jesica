@@ -2156,269 +2156,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./resources/js/getData.js":
-/*!*********************************!*\
-  !*** ./resources/js/getData.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getDataPolygon": () => (/* binding */ getDataPolygon)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var getDataPolygon = function getDataPolygon() {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/".concat(route)).then(function (res) {
-    console.log(res.data);
-    return res.data;
-  })["catch"](function (err) {
-    console.log(err);
-  });
-};
-
-
-
-/***/ }),
-
-/***/ "./resources/js/maps/init.js":
-/*!***********************************!*\
-  !*** ./resources/js/maps/init.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   "div_map": () => (/* binding */ div_map)
-/* harmony export */ });
-// select id map
-var div_map = document.getElementById("map"); // style div_map
-
-div_map.style.width = "100%";
-div_map.style.height = "100vh";
-mapboxgl.accessToken = "pk.eyJ1Ijoia2luZ3BybyIsImEiOiJjbDQ3anFhenMwaTh4M2ptb3NlamczZDQyIn0.w9C4ttg39IoyFfBDp3dSkg";
-var map = new mapboxgl.Map({
-  container: "map",
-  // container ID
-  style: "mapbox://styles/mapbox/streets-v11",
-  // style URL
-  center: [-74.5, 40],
-  // starting position [lng, lat]
-  zoom: 9 // starting zoom
-
-}); // Add zoom and rotation controls to the map.
-
-map.addControl(new mapboxgl.NavigationControl(), "top-left");
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (map);
-
-/***/ }),
-
-/***/ "./resources/js/maps/polygon.js":
-/*!**************************************!*\
-  !*** ./resources/js/maps/polygon.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "list_koordinat": () => (/* binding */ list_koordinat),
-/* harmony export */   "refreshMap": () => (/* binding */ refreshMap)
-/* harmony export */ });
-/* harmony import */ var _init__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./init */ "./resources/js/maps/init.js");
-/* harmony import */ var _getData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../getData */ "./resources/js/getData.js");
-/* harmony import */ var _my_crud_hapus__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../my_crud/hapus */ "./resources/js/my_crud/hapus.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-
-
-
-var list_koordinat = document.getElementById("list-koordinat");
-_init__WEBPACK_IMPORTED_MODULE_0__.div_map.style.height = "80vh";
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].setCenter([140.69375187626062, -2.5605874902233956]);
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].setZoom(11);
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].setStyle("mapbox://styles/mapbox/satellite-streets-v11");
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].on("load", function () {
-  showPolygon();
-});
-
-var showPolygon = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var data, coordinates, features;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return (0,_getData__WEBPACK_IMPORTED_MODULE_1__.getDataPolygon)();
-
-          case 2:
-            data = _context.sent;
-            coordinates = [];
-            features = []; // if data exist
-
-            if (data.length > 0) {
-              data.forEach(function (coord) {
-                coord.koordinat.koordinat_det.forEach(function (element) {
-                  coordinates.push([element.longitude, element.latitude]);
-                });
-                features.push({
-                  type: "Feature",
-                  properties: {
-                    id: coord.koordinat.id,
-                    nm_kawasan: coord.nm_kawasan,
-                    luas: coord.luas,
-                    color: coord.warna //coord.warna, //rgba(255, 0, 114, 0.24)
-
-                  },
-                  geometry: {
-                    type: "Polygon",
-                    coordinates: [coordinates]
-                  }
-                });
-                coordinates = [];
-              });
-            } // Add a source for the state polygons.
-
-
-            _init__WEBPACK_IMPORTED_MODULE_0__["default"].addSource("area", {
-              type: "geojson",
-              data: {
-                type: "FeatureCollection",
-                features: features
-              }
-            }); // Add a layer showing the state polygons.
-
-            _init__WEBPACK_IMPORTED_MODULE_0__["default"].addLayer({
-              id: "area-layer",
-              type: "fill",
-              source: "area",
-              paint: {
-                "fill-color": ["get", "color"],
-                "fill-opacity": 0.8
-              }
-            });
-
-          case 8:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function showPolygon() {
-    return _ref.apply(this, arguments);
-  };
-}(); // When a click event occurs on a feature in the area layer,
-// open a popup at the location of the click, with description
-// HTML from the click event's properties.
-
-
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].on("click", "area-layer", function (e) {
-  var item = e.features[0].properties;
-  var show = "";
-  console.log(show);
-
-  if (route == "kawasan") {
-    show = "".concat(item.nm_kawasan, ", ").concat(item.luas, " ha");
-  }
-
-  new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(_init__WEBPACK_IMPORTED_MODULE_0__["default"]);
-}); // Change the cursor to a pointer when
-// the mouse is over the area layer.
-
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].on("mouseenter", "area-layer", function () {
-  _init__WEBPACK_IMPORTED_MODULE_0__["default"].getCanvas().style.cursor = "pointer";
-}); // Change the cursor back to a pointer
-// when it leaves the area layer.
-
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].on("mouseleave", "area-layer", function () {
-  _init__WEBPACK_IMPORTED_MODULE_0__["default"].getCanvas().style.cursor = "";
-}); // when mouse double click
-
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].on("contextmenu", "area-layer", function (e) {
-  var href = e.features[0].properties.id;
-  (0,_my_crud_hapus__WEBPACK_IMPORTED_MODULE_2__["default"])(href);
-});
-var btn_refresh = document.getElementById("refresh");
-btn_refresh.addEventListener("click", function () {
-  refreshMap();
-});
-
-var refreshMap = function refreshMap() {
-  console.log("remove layer");
-  _init__WEBPACK_IMPORTED_MODULE_0__["default"].removeLayer("area-layer");
-  _init__WEBPACK_IMPORTED_MODULE_0__["default"].removeSource("area");
-  setTimeout(function () {
-    showPolygon();
-  }, 500);
-};
-
-var drawPolygon = function drawPolygon() {
-  var draw = new MapboxDraw({
-    displayControlsDefault: false,
-    // Select which mapbox-gl-draw control buttons to add to the map.
-    controls: {
-      polygon: true,
-      trash: true
-    } // Set mapbox-gl-draw to draw by default.
-    // The user does not have to click the polygon control button first.
-
-  });
-  _init__WEBPACK_IMPORTED_MODULE_0__["default"].addControl(draw);
-  _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("draw.create", updateArea);
-  _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("draw.delete", updateArea);
-  _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("draw.update", updateArea);
-
-  function updateArea(e) {
-    var data = draw.getAll();
-
-    if (data.features.length > 0) {
-      var area = turf.area(data); // area to kilometers
-
-      var areaKm = area / 1000; // round to 2 decimals
-
-      var areaKmRounded = Math.round(areaKm * 100) / 100; // select id tambah
-
-      var tambah = document.getElementById("tambah"); // tambah click
-
-      tambah.click();
-      var luas = document.getElementById("luas");
-      luas.value = areaKmRounded;
-      inputKoordinat(e.features[0].geometry.coordinates[0], draw);
-      console.log(e.features[0].geometry.coordinates[0]);
-    } else {
-      if (e.type !== "draw.delete") alert("Click the map to draw a polygon.");
-    }
-  }
-};
-
-var inputKoordinat = function inputKoordinat(data, draw) {
-  list_koordinat.innerHTML = "";
-  data.forEach(function (item) {
-    list_koordinat.innerHTML += "<div class=\"col-6 mt-2 animate__animated animate__bounceInDown\">\n                                        <label for=\"longitude\">Longitude</label>\n                                        <input type=\"text\" value=\"".concat(item[0], "\" class=\"form-control inputReset\" name=\"longitude[]\" id=\"longitude\"\n                                            required />\n                                    </div>\n                                    <div class=\"col-6 mt-2 animate__animated animate__bounceInDown\">\n                                        <label for=\"latitude\">Latitude</label>\n                                        <input type=\"text\" value=\"").concat(item[1], "\" class=\"form-control inputReset\" name=\"latitude[]\" id=\"latitude\"\n                                            required />\n                                    </div>");
-  });
-  draw.deleteAll();
-}; // showPolygon();
-
-
-drawPolygon();
-
-
-/***/ }),
-
 /***/ "./resources/js/my_crud/hapus.js":
 /*!***************************************!*\
   !*** ./resources/js/my_crud/hapus.js ***!
@@ -2435,11 +2172,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./resources/js/my_crud/tools.js");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _maps_polygon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../maps/polygon */ "./resources/js/maps/polygon.js");
 
 
-
- // click body selector btn-hapus
+ // import { refreshMap } from "../maps/polygon";
+// click body selector btn-hapus
 
 $(document).on("click", ".btn-hapus", function (e) {
   e.preventDefault();
@@ -2463,7 +2199,8 @@ var swalDelete = function swalDelete(href) {
         _tools__WEBPACK_IMPORTED_MODULE_1__.toastr[response.data.type](response.data.pesan, response.data.judul);
 
         if (route == "kawasan") {
-          (0,_maps_polygon__WEBPACK_IMPORTED_MODULE_3__.refreshMap)();
+          var btn_refresh = document.getElementById("refresh");
+          btn_refresh.click();
           return;
         }
 
@@ -2493,9 +2230,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _maps_polygon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../maps/polygon */ "./resources/js/maps/polygon.js");
-/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tools */ "./resources/js/my_crud/tools.js");
-
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./resources/js/my_crud/tools.js");
 
 
 console.log("route", route);
@@ -2504,7 +2239,7 @@ btn_tambah.addEventListener("click", function () {
   // show modal data-modal-toggle="defaultModal"
   $(".tampilModal").modal("show"); // set save_method
 
-  (0,_tools__WEBPACK_IMPORTED_MODULE_2__.setSaveMethod)("tambah"); // set attribut form
+  (0,_tools__WEBPACK_IMPORTED_MODULE_1__.setSaveMethod)("tambah"); // set attribut form
 
   setForm(); // reset form
 
@@ -2520,12 +2255,14 @@ var resetForm = function resetForm() {
   $(".selectReset").val("").trigger("change");
   $(".inputReset").val("");
 
-  if (_tools__WEBPACK_IMPORTED_MODULE_2__.save_method !== "tambah") {
+  if (_tools__WEBPACK_IMPORTED_MODULE_1__.save_method !== "tambah") {
     $(".tampilModal").modal("hide");
   }
 
-  if (_maps_polygon__WEBPACK_IMPORTED_MODULE_1__.list_koordinat) {
-    _maps_polygon__WEBPACK_IMPORTED_MODULE_1__.list_koordinat.innerHTML = "";
+  var list_koordinat = document.getElementById("list-koordinat");
+
+  if (list_koordinat) {
+    list_koordinat.innerHTML = "";
   }
 }; // submit form
 
@@ -2544,7 +2281,7 @@ document.getElementById("formKu").addEventListener("submit", function (e) {
   var method;
   var url;
 
-  if (_tools__WEBPACK_IMPORTED_MODULE_2__.save_method === "tambah") {
+  if (_tools__WEBPACK_IMPORTED_MODULE_1__.save_method === "tambah") {
     method = "post";
     url = "/crud/".concat(route);
   } else {
@@ -2558,7 +2295,7 @@ document.getElementById("formKu").addEventListener("submit", function (e) {
     data: data
   }).then(function (response) {
     // return console.log("response", response);
-    _tools__WEBPACK_IMPORTED_MODULE_2__.toastr[response.data.type](response.data.pesan, response.data.judul);
+    _tools__WEBPACK_IMPORTED_MODULE_1__.toastr[response.data.type](response.data.pesan, response.data.judul);
 
     if (response.data.type === "error") {
       return;

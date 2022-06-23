@@ -1,5 +1,4 @@
 import axios from "axios";
-import { list_koordinat, refreshMap } from "../maps/polygon";
 import { toastr, save_method, setSaveMethod } from "./tools";
 console.log("route", route);
 
@@ -26,6 +25,7 @@ const resetForm = () => {
     if (save_method !== "tambah") {
         $(".tampilModal").modal("hide");
     }
+    const list_koordinat = document.getElementById("list-koordinat");
     if (list_koordinat) {
         list_koordinat.innerHTML = "";
     }
