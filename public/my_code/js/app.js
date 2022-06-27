@@ -2196,7 +2196,6 @@ try {
     tags: true,
     dropdownParent: $(".tampilModal"),
     width: "100%",
-    placeholder: "Pilih",
     theme: "bootstrap"
   }); // require("bootstrap");
 } catch (e) {}

@@ -14,11 +14,17 @@ class KawasanTutupanController extends Controller
     protected function spartaValidation($request, $id = "")
     {
         $rules = [
-            'nm_tutupan' => 'required',
+            'kawasan_id' => 'required',
+            'tutupan_id' => 'required',
+            'luas' => 'required',
+            'presentase' => 'required',
         ];
 
         $messages = [
-            'nm_tutupan.required' => 'Nama tutupan harus diisi.',
+            'kawasan_id.required' => 'Kawasn harus diisi.',
+            'tutupan_id.required' => 'Tutupan harus diisi.',
+            'luas.required' => 'Luas harus diisi.',
+            'presentase.required' => 'Presentase harus diisi.',
         ];
         $validator = Validator::make($request, $rules, $messages);
 
@@ -71,7 +77,19 @@ class KawasanTutupanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data_req = $request->all();
+
+        $validate = $this->spartaValidation($data_req);
+        if ($validate) {
+            return $validate;
+        }
+        $data = KawasanTutupan::create($data_req);
+        $pesan = [
+            'judul' => 'Berhasil',
+            'pesan' => 'Data Telah Ditambahkan',
+            'type' => 'success'
+        ];
+        return response()->json($pesan);
     }
 
     /**
@@ -93,7 +111,8 @@ class KawasanTutupanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = KawasanTutupan::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -105,7 +124,20 @@ class KawasanTutupanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data_req = $request->all();
+
+        $validate = $this->spartaValidation($data_req);
+        if ($validate) {
+            return $validate;
+        }
+        $data = KawasanTutupan::find($id);
+        $data->update($data_req);
+        $pesan = [
+            'judul' => 'Berhasil',
+            'pesan' => 'Data Telah Diubah',
+            'type' => 'success'
+        ];
+        return response()->json($pesan);
     }
 
     /**
@@ -116,6 +148,13 @@ class KawasanTutupanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = KawasanTutupan::find($id);
+        $data->delete();
+        $pesan = [
+            'judul' => 'Berhasil',
+            'pesan' => 'Data Telah Dihapus',
+            'type' => 'success'
+        ];
+        return response()->json($pesan);
     }
 }

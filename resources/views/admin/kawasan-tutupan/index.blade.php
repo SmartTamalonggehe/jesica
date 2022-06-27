@@ -25,7 +25,10 @@ $folder = 'kawasan-tutupan';
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Tutupan</th>
+                        <th>Kawasan</th>
+                        <th>Tutupan</th>
+                        <th>Luas</th>
+                        <th>Presentase</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
@@ -56,7 +59,16 @@ $folder = 'kawasan-tutupan';
                         searchable: false
                     },
                     {
-                        data: 'nm_tutupan',
+                        data: 'kawasan.nm_kawasan',
+                    },
+                    {
+                        data: 'tutupan.nm_tutupan',
+                    },
+                    {
+                        data: 'luas',
+                    },
+                    {
+                        data: 'presentase',
                     },
                     {
                         data: 'action',

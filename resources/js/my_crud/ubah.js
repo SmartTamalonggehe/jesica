@@ -29,6 +29,13 @@ const formData = (data) => {
         document.getElementById("id_form").value = data.id;
         document.getElementById("nm_tutupan").value = data.nm_tutupan;
     }
+    if (route == "kawasan-tutupan") {
+        document.getElementById("id_form").value = data.id;
+        $("#kawasan-id").val(data.kawasan_id).trigger("change");
+        $("#tutupan-id").val(data.tutupan_id).trigger("change");
+        document.getElementById("luas").value = data.luas;
+        document.getElementById("presentase").value = data.presentase;
+    }
     // if (route == "nilai") {
     //     document.getElementById("id_form").value = data.id;
     //     $("#student-id").val(data.student_id).trigger("change");

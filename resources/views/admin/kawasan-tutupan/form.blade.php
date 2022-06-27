@@ -9,21 +9,36 @@
              </div>
              <form id="formKu" class="tooltip-end-top">
                  @csrf
-                 <input type="hidden" name="id_form" class="inputReset" id="id_form">
+                 <input type="hidden" name="id" class="inputReset" id="id_form">
                  <div class="modal-body">
                      <div class="row">
                          <div class="col-12">
                              <div class="mb-3">
-                                 <label for="nm_tutupan">Nama Tutupan</label>
-                                 <input type="text" class="form-control inputReset" name="nm_tutupan" id="nm_tutupan"
-                                     required />
+                                 <label for="kawasan-id">Kawasan</label>
+                                 <select name="kawasan_id" id="kawasan-id" class="select2_basic">
+                                 </select>
                              </div>
                          </div>
                          <div class="col-12">
                              <div class="mb-3">
-                                 <label for="nm_tutupan">Kawasan</label>
-                                 <select name="kawasan_id" id="kawasan_id" class="select2_basic">
+                                 <label for="tutupan-id">Tutupan</label>
+                                 <select name="tutupan_id" id="tutupan-id" class="select2_basic">
+
                                  </select>
+                             </div>
+                         </div>
+                         <div class="col-12 col-md-6">
+                             <div class="mb-3">
+                                 <label for="luas">Luas</label>
+                                 <input type="text" class="form-control inputReset" name="luas" id="luas"
+                                     required />
+                             </div>
+                         </div>
+                         <div class="col-12 col-md-6">
+                             <div class="mb-3">
+                                 <label for="presentase">Presentase</label>
+                                 <input type="text" class="form-control inputReset" name="presentase" id="presentase"
+                                     required />
                              </div>
                          </div>
                      </div>
