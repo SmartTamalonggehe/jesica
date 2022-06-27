@@ -1,4 +1,4 @@
-@extends('admin.layouts.default')
+@extends('user.layouts.default')
 
 @php
 $folder = 'dashboard';
@@ -10,11 +10,11 @@ $folder = 'dashboard';
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title">Basic datatable</h5>
+            <h5 class="card-title">Grafik ...</h5>
         </div>
 
         <div class="card-body">
-            Grafik
+            Tampat Grafik
         </div>
 
     </div>

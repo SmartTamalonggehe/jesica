@@ -2207,20 +2207,20 @@ if (list_koordinat) {
 
 /***/ }),
 
-/***/ "./resources/js/components/nav_bar.js":
+/***/ "./resources/js/components/nav-bar.js":
 /*!********************************************!*\
-  !*** ./resources/js/components/nav_bar.js ***!
+  !*** ./resources/js/components/nav-bar.js ***!
   \********************************************/
 /***/ (() => {
 
-var nav_bar = document.querySelector(".nav-sidebar");
+var nav_bar = document.querySelector(".navbar-nav");
 
 var selector = function selector() {
   // select a in nav-item and add class active if it's the current page
   var nav_items = document.querySelectorAll(".nav-item a");
   var location = window.location.href;
   nav_items.forEach(function (item) {
-    if (item.getAttribute("href") == location) {
+    if (item.href === location) {
       item.classList.add("active"); // check parent of nav-item and add class active if it's the current page
 
       var parent1 = item.parentElement.parentElement;
@@ -2244,6 +2244,7 @@ var selector = function selector() {
 
 if (nav_bar) {
   selector();
+  console.log("nav-bar loaded");
 }
 
 /***/ }),
@@ -2363,6 +2364,47 @@ var selectTutupan = /*#__PURE__*/function () {
 }();
 
 selectTutupan();
+
+/***/ }),
+
+/***/ "./resources/js/components/side_bar.js":
+/*!*********************************************!*\
+  !*** ./resources/js/components/side_bar.js ***!
+  \*********************************************/
+/***/ (() => {
+
+var nav_bar = document.querySelector(".nav-sidebar");
+
+var selector = function selector() {
+  // select a in nav-item and add class active if it's the current page
+  var nav_items = document.querySelectorAll(".nav-item a");
+  var location = window.location.href;
+  nav_items.forEach(function (item) {
+    if (item.getAttribute("href") == location) {
+      item.classList.add("active"); // check parent of nav-item and add class active if it's the current page
+
+      var parent1 = item.parentElement.parentElement;
+      var parent2 = item.parentElement.parentElement.parentElement;
+      var parent;
+
+      if (parent1.classList.contains("nav-item-submenu")) {
+        parent = parent1;
+      } else if (parent2.classList.contains("nav-item-submenu")) {
+        parent = parent2;
+      } // check if parent is nav-item-submenu
+
+
+      if (parent) {
+        parent.classList.add("nav-item-expanded");
+        parent.classList.add("nav-item-open");
+      }
+    }
+  });
+};
+
+if (nav_bar) {
+  selector();
+}
 
 /***/ }),
 
@@ -2682,7 +2724,9 @@ var __webpack_exports__ = {};
 /*!************************************!*\
   !*** ./resources/js/components.js ***!
   \************************************/
-__webpack_require__(/*! ./components/nav_bar */ "./resources/js/components/nav_bar.js");
+__webpack_require__(/*! ./components/side_bar */ "./resources/js/components/side_bar.js");
+
+__webpack_require__(/*! ./components/nav-bar */ "./resources/js/components/nav-bar.js");
 
 __webpack_require__(/*! ./components/list_koordinat */ "./resources/js/components/list_koordinat.js");
 
