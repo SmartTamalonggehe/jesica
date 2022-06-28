@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\KawasanAPI;
+use App\Http\Controllers\API\KawasanTutupanAPI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\PolygonAPI;
@@ -29,3 +30,7 @@ Route::controller(KawasanAPI::class)->prefix('kawasan')->group(function () {
 });
 
 Route::get('tutupan', [TutupanAPI::class, 'index'])->name('tutupan.index');
+
+Route::controller(KawasanTutupanAPI::class)->prefix('kawasan-tutupan')->group(function () {
+    Route::get('/', 'index')->name('kawasan-tutupan.index');
+});

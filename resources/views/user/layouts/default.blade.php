@@ -61,6 +61,7 @@
         if (route) {
             route = route.textContent
         }
+        const role = 'user';
     </script>
 
     @include('user.layouts.scripts')

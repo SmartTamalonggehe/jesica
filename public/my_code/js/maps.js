@@ -2229,7 +2229,7 @@ var map = new mapboxgl.Map({
   // style URL
   center: [-74.5, 40],
   // starting position [lng, lat]
-  zoom: 9 // starting zoom
+  zoom: 8 // starting zoom
 
 }); // Add zoom and rotation controls to the map.
 
@@ -2251,7 +2251,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "refreshMap": () => (/* binding */ refreshMap)
 /* harmony export */ });
 /* harmony import */ var _init__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./init */ "./resources/js/maps/init.js");
-/* harmony import */ var _getData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../getData */ "./resources/js/getData.js");
+/* harmony import */ var _getData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../getData */ "./resources/js/getData.js");
 /* harmony import */ var _my_crud_hapus__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../my_crud/hapus */ "./resources/js/my_crud/hapus.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -2266,8 +2266,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var list_koordinat = document.getElementById("list-koordinat");
 _init__WEBPACK_IMPORTED_MODULE_0__.div_map.style.height = "80vh";
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].setCenter([140.69375187626062, -2.5605874902233956]);
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].setZoom(11);
+_init__WEBPACK_IMPORTED_MODULE_0__["default"].setCenter([140.47879036870296, -2.668376578653124]);
+_init__WEBPACK_IMPORTED_MODULE_0__["default"].setZoom(9);
 _init__WEBPACK_IMPORTED_MODULE_0__["default"].setStyle("mapbox://styles/mapbox/satellite-streets-v11");
 _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("load", function () {
   showPolygon();
@@ -2348,14 +2348,7 @@ var showPolygon = /*#__PURE__*/function () {
 
 _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("click", "area-layer", function (e) {
   var item = e.features[0].properties;
-  var show = "";
-  console.log(show);
-
-  if (route == "kawasan") {
-    show = "".concat(item.nm_kawasan, ", ").concat(item.luas, " ha");
-  }
-
-  new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(_init__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  showPopup(item, e);
 }); // Change the cursor to a pointer when
 // the mouse is over the area layer.
 
@@ -2366,12 +2359,15 @@ _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("mouseenter", "area-layer", fun
 
 _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("mouseleave", "area-layer", function () {
   _init__WEBPACK_IMPORTED_MODULE_0__["default"].getCanvas().style.cursor = "";
-}); // when mouse double click
+}); // when mouse click right
 
-_init__WEBPACK_IMPORTED_MODULE_0__["default"].on("contextmenu", "area-layer", function (e) {
-  var href = e.features[0].properties.id;
-  (0,_my_crud_hapus__WEBPACK_IMPORTED_MODULE_2__["default"])(href);
-});
+var mouseRight = function mouseRight() {
+  _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("contextmenu", "area-layer", function (e) {
+    var href = e.features[0].properties.id;
+    (0,_my_crud_hapus__WEBPACK_IMPORTED_MODULE_2__["default"])(href);
+  });
+};
+
 var btn_refresh = document.getElementById("refresh");
 btn_refresh.addEventListener("click", function () {
   refreshMap();
@@ -2426,15 +2422,32 @@ var drawPolygon = function drawPolygon() {
 };
 
 var inputKoordinat = function inputKoordinat(data, draw) {
-  list_koordinat.innerHTML = "";
+  list_koordinat.innerHTML = ""; // remove last data array
+
+  data.pop();
   data.forEach(function (item) {
     list_koordinat.innerHTML += "<div class=\"col-6 mt-2 animate__animated animate__bounceInDown\">\n                                        <label for=\"longitude\">Longitude</label>\n                                        <input type=\"text\" value=\"".concat(item[0], "\" class=\"form-control inputReset\" name=\"longitude[]\" id=\"longitude\"\n                                            required />\n                                    </div>\n                                    <div class=\"col-6 mt-2 animate__animated animate__bounceInDown\">\n                                        <label for=\"latitude\">Latitude</label>\n                                        <input type=\"text\" value=\"").concat(item[1], "\" class=\"form-control inputReset\" name=\"latitude[]\" id=\"latitude\"\n                                            required />\n                                    </div>");
   });
   draw.deleteAll();
+}; // show popup
+
+
+var showPopup = function showPopup(item, e) {
+  var show = "";
+
+  if (route == "kawasan") {
+    show = "<table class=\"table-popup\">\n                    <tr>\n                        <th>Kawasan:</th>\n                        <td>".concat(item.nm_kawasan, "</td>\n                    </tr>\n                    <tr>\n                        <th>Luas:</th>\n                        <td>").concat(item.luas, "</td>\n                    </tr>\n                    <tr>\n                        <td colspan=\"2\">\n                            <p class=\"text-center mt-2\">\n                                <a href=\"#\" target=\"_blank\">Kawasan Tutupan</a>\n                            </p>\n                        </td>\n                    </tr>\n                </table>");
+  }
+
+  new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(_init__WEBPACK_IMPORTED_MODULE_0__["default"]);
 }; // showPolygon();
 
 
-drawPolygon();
+if (role == "admin") {
+  drawPolygon();
+  mouseRight();
+}
+
 
 
 /***/ }),

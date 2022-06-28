@@ -22,12 +22,19 @@
                          </div>
                          <div class="col-3">
                              <div class="mb-3">
+                                 <label for="kd_kawasan">Kode Kawasan</label>
+                                 <input type="text" class="form-control inputReset" name="kd_kawasan" id="kd_kawasan"
+                                     required />
+                             </div>
+                         </div>
+                         <div class="col-3">
+                             <div class="mb-3">
                                  <label for="warna">Warna</label>
                                  <input type="color" class="form-control inputReset" name="warna" id="warna"
                                      value="#ff0000" required />
                              </div>
                          </div>
-                         <div class="col-9">
+                         <div class="col-6">
                              <div class="mb-3">
                                  <label for="luas">Luas</label>
                                  <input type="text" class="form-control inputReset" name="luas" id="luas"

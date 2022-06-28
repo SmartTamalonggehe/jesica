@@ -69,6 +69,7 @@
         if (route) {
             route = route.textContent
         }
+        const role = 'admin';
     </script>
 
     @include('admin.layouts.scripts')

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('koordinat_id')->constrained('koordinat')
                 ->onDelete('cascade')->onUpdate('cascade');
+            $table->string('kd_kawasan', 10);
             $table->string('nm_kawasan', 100);
             $table->string('warna', 10);
             $table->decimal('luas', 10, 3);

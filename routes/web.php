@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('user.dashboard.index');
 })->name('user.dashboard');
 
+Route::get('kawasan', function () {
+    return view('user.kawasan.index');
+})->name('user.kawasan');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

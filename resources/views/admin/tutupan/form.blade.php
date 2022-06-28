@@ -9,12 +9,12 @@
              </div>
              <form id="formKu" class="tooltip-end-top">
                  @csrf
-                 <input type="hidden" name="id_form" class="inputReset" id="id_form">
+                 <input type="hidden" name="id" class="inputReset" id="id_form">
                  <div class="modal-body">
                      <div class="row">
                          <div class="col-12">
                              <div class="mb-3">
-                                 <label for="nm_tutupan">Nama Tutupan</label>
+                                 <label for="nm_tutupan">Tipe Tutupan</label>
                                  <input type="text" class="form-control inputReset" name="nm_tutupan" id="nm_tutupan"
                                      required />
                              </div>

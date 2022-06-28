@@ -1,13 +1,13 @@
 import map, { div_map } from "./init";
 
-import { getDataPolygon } from "./../getData";
+import { getDataPolygon } from "../getData";
 import swalDelete from "../my_crud/hapus";
 
 const list_koordinat = document.getElementById("list-koordinat");
 
 div_map.style.height = "80vh";
-map.setCenter([140.69375187626062, -2.5605874902233956]);
-map.setZoom(11);
+map.setCenter([140.47879036870296, -2.668376578653124]);
+map.setZoom(9);
 map.setStyle("mapbox://styles/mapbox/satellite-streets-v11");
 
 map.on("load", () => {
@@ -67,12 +67,7 @@ const showPolygon = async () => {
 // HTML from the click event's properties.
 map.on("click", "area-layer", (e) => {
     const item = e.features[0].properties;
-    let show = "";
-    console.log(show);
-    if (route == "kawasan") {
-        show = `${item.nm_kawasan}, ${item.luas} ha`;
-    }
-    new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(map);
+    showPopup(item, e);
 });
 
 // Change the cursor to a pointer when
@@ -86,11 +81,14 @@ map.on("mouseenter", "area-layer", () => {
 map.on("mouseleave", "area-layer", () => {
     map.getCanvas().style.cursor = "";
 });
-// when mouse double click
-map.on("contextmenu", "area-layer", (e) => {
-    const href = e.features[0].properties.id;
-    swalDelete(href);
-});
+// when mouse click right
+const mouseRight = () => {
+    map.on("contextmenu", "area-layer", (e) => {
+        const href = e.features[0].properties.id;
+        swalDelete(href);
+    });
+};
+
 const btn_refresh = document.getElementById("refresh");
 btn_refresh.addEventListener("click", () => {
     refreshMap();
@@ -148,6 +146,8 @@ const drawPolygon = () => {
 
 const inputKoordinat = (data, draw) => {
     list_koordinat.innerHTML = "";
+    // remove last data array
+    data.pop();
     data.forEach((item) => {
         list_koordinat.innerHTML += `<div class="col-6 mt-2 animate__animated animate__bounceInDown">
                                         <label for="longitude">Longitude</label>
@@ -163,7 +163,35 @@ const inputKoordinat = (data, draw) => {
     draw.deleteAll();
 };
 
+// show popup
+const showPopup = (item, e) => {
+    let show = "";
+    if (route == "kawasan") {
+        show = `<table class="table-popup">
+                    <tr>
+                        <th>Kawasan:</th>
+                        <td>${item.nm_kawasan}</td>
+                    </tr>
+                    <tr>
+                        <th>Luas:</th>
+                        <td>${item.luas}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p class="text-center mt-2">
+                                <a href="#" target="_blank">Kawasan Tutupan</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>`;
+    }
+    new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(map);
+};
+
 // showPolygon();
-drawPolygon();
+if (role == "admin") {
+    drawPolygon();
+    mouseRight();
+}
 
 export { refreshMap, list_koordinat };

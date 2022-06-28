@@ -2233,18 +2233,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./resources/js/my_crud/tools.js");
 
 
-console.log("route", route);
 var btn_tambah = document.getElementById("tambah");
-btn_tambah.addEventListener("click", function () {
-  // show modal data-modal-toggle="defaultModal"
-  $(".tampilModal").modal("show"); // set save_method
 
-  (0,_tools__WEBPACK_IMPORTED_MODULE_1__.setSaveMethod)("tambah"); // set attribut form
+if (btn_tambah) {
+  btn_tambah.addEventListener("click", function () {
+    // show modal data-modal-toggle="defaultModal"
+    $(".tampilModal").modal("show"); // set save_method
 
-  setForm(); // reset form
+    (0,_tools__WEBPACK_IMPORTED_MODULE_1__.setSaveMethod)("tambah"); // set attribut form
 
-  resetForm();
-});
+    setForm(); // reset form
+
+    resetForm();
+  });
+}
 
 var setForm = function setForm() {
   document.getElementById("judul_form").innerText = "From Tambah Data";
@@ -2267,54 +2269,59 @@ var resetForm = function resetForm() {
 }; // submit form
 
 
-document.getElementById("formKu").addEventListener("submit", function (e) {
-  e.preventDefault(); // get data from form with serialize
+var formKu = document.getElementById("formKu");
 
-  var formData = $(this).serialize();
-  var data = formData; // get data from form
-  // const formData = new FormData(this);
-  // data={}
-  // formData.forEach(function (value, key) {
-  //     data[key] = value;
-  // });
+if (formKu) {
+  formKu.addEventListener("submit", function (e) {
+    e.preventDefault(); // get data from form with serialize
 
-  var method;
-  var url;
+    var formData = $(this).serialize();
+    var data = formData; // get data from form
+    // const formData = new FormData(this);
+    // data={}
+    // formData.forEach(function (value, key) {
+    //     data[key] = value;
+    // });
 
-  if (_tools__WEBPACK_IMPORTED_MODULE_1__.save_method === "tambah") {
-    method = "post";
-    url = "/crud/".concat(route);
-  } else {
-    method = "put";
-    url = "/crud/".concat(route, "/").concat(data.id);
-  }
+    var method;
+    var url;
 
-  axios__WEBPACK_IMPORTED_MODULE_0___default()({
-    method: method,
-    url: url,
-    data: data
-  }).then(function (response) {
-    // return console.log("response", response);
-    _tools__WEBPACK_IMPORTED_MODULE_1__.toastr[response.data.type](response.data.pesan, response.data.judul);
-
-    if (response.data.type === "error") {
-      return;
+    if (_tools__WEBPACK_IMPORTED_MODULE_1__.save_method === "tambah") {
+      method = "post";
+      url = "/crud/".concat(route);
+    } else {
+      method = "put";
+      url = "/crud/".concat(route, "/").concat(data.id);
     }
 
-    resetForm();
+    axios__WEBPACK_IMPORTED_MODULE_0___default()({
+      method: method,
+      url: url,
+      data: data
+    }).then(function (response) {
+      // return console.log("response", response);
+      _tools__WEBPACK_IMPORTED_MODULE_1__.toastr[response.data.type](response.data.pesan, response.data.judul);
 
-    if (route == "kawasan") {
-      var btn_refresh = document.getElementById("refresh");
-      btn_refresh.click();
-      return;
-    }
+      if (response.data.type === "error") {
+        return;
+      }
 
-    var oTable = $("#my_table").dataTable();
-    oTable.fnDraw(false);
-  })["catch"](function (error) {
-    console.log(error);
+      resetForm();
+
+      if (route == "kawasan") {
+        var btn_refresh = document.getElementById("refresh");
+        btn_refresh.click();
+        return;
+      }
+
+      var oTable = $("#my_table").dataTable();
+      oTable.fnDraw(false);
+    })["catch"](function (error) {
+      console.log(error);
+    });
   });
-});
+}
+
 
 
 /***/ }),

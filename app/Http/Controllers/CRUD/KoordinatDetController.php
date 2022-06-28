@@ -36,14 +36,20 @@ class KoordinatDetController extends Controller
      */
     public function store(Request $request, $id)
     {
-        $longitude = $request->longitude;
-        foreach ($longitude as $key => $value) {
+        $koordinat = $request->longitude;
+        foreach ($koordinat as $key => $value) {
             KoordinatDet::create([
                 'koordinat_id' => $id,
                 'longitude' => $request->longitude[$key],
                 'latitude' => $request->latitude[$key]
             ]);
         }
+        // last koordinat
+        KoordinatDet::create([
+            'koordinat_id' => $id,
+            'longitude' => $request->longitude[0],
+            'latitude' => $request->latitude[0]
+        ]);
     }
 
     /**
