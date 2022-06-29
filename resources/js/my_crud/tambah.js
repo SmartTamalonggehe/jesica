@@ -40,13 +40,7 @@ if (formKu) {
         // get data from form with serialize
         const formData = $(this).serialize();
         const data = formData;
-
-        // get data from form
-        // const formData = new FormData(this);
-        // data={}
-        // formData.forEach(function (value, key) {
-        //     data[key] = value;
-        // });
+        const id_form = document.getElementById("id_form").value;
 
         let method;
         let url;
@@ -55,7 +49,7 @@ if (formKu) {
             url = `/crud/${route}`;
         } else {
             method = "put";
-            url = `/crud/${route}/${data.id}`;
+            url = `/crud/${route}/${id_form}`;
         }
 
         axios({

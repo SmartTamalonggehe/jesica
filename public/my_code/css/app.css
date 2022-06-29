@@ -4614,6 +4614,10 @@
     text-align: right;
     padding-right: 5px;
 }
+/* menu */
+.list-group.my-group {
+    width: 100px;
+}
 
 body.lb-disable-scrolling {
     overflow: hidden;

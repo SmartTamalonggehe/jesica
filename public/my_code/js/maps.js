@@ -2265,6 +2265,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var list_koordinat = document.getElementById("list-koordinat");
+var popup;
 _init__WEBPACK_IMPORTED_MODULE_0__.div_map.style.height = "80vh";
 _init__WEBPACK_IMPORTED_MODULE_0__["default"].setCenter([140.47879036870296, -2.668376578653124]);
 _init__WEBPACK_IMPORTED_MODULE_0__["default"].setZoom(9);
@@ -2363,8 +2364,14 @@ _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("mouseleave", "area-layer", fun
 
 var mouseRight = function mouseRight() {
   _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("contextmenu", "area-layer", function (e) {
+    if (popup) popup.remove();
     var href = e.features[0].properties.id;
-    (0,_my_crud_hapus__WEBPACK_IMPORTED_MODULE_2__["default"])(href);
+    var menu = "<div class=\"list-group my-group\">\n                        <span role=\"button\" data-id=\"".concat(href, "\" class=\"btn-ubah list-group-item list-group-item-action list-group-item-warning\">Ubah</span>\n                        <span role=\"button\" data-id=\"").concat(href, "\" class=\"hapus-peta list-group-item list-group-item-action list-group-item-danger\">Hapus</span>\n                    </div>"); // create popup
+
+    popup = new mapboxgl.Popup({
+      offset: [0, -15],
+      anchor: "right"
+    }).setLngLat(e.lngLat).setHTML(menu).addTo(_init__WEBPACK_IMPORTED_MODULE_0__["default"]); // remove popup when click outside
   });
 };
 
@@ -2439,13 +2446,29 @@ var showPopup = function showPopup(item, e) {
     show = "<table class=\"table-popup\">\n                    <tr>\n                        <th>Kawasan:</th>\n                        <td>".concat(item.nm_kawasan, "</td>\n                    </tr>\n                    <tr>\n                        <th>Luas:</th>\n                        <td>").concat(item.luas, "</td>\n                    </tr>\n                    <tr>\n                        <td colspan=\"2\">\n                            <p class=\"text-center mt-2\">\n                                <a href=\"#\" target=\"_blank\">Kawasan Tutupan</a>\n                            </p>\n                        </td>\n                    </tr>\n                </table>");
   }
 
-  new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(_init__WEBPACK_IMPORTED_MODULE_0__["default"]);
+  popup = new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(_init__WEBPACK_IMPORTED_MODULE_0__["default"]);
+};
+
+var btnAksi = function btnAksi() {
+  // click body and find ubah peta
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("btn-ubah")) {
+      popup.remove(); // swalUbah(data);
+    }
+
+    if (e.target.classList.contains("hapus-peta")) {
+      var id = e.target.dataset.id;
+      (0,_my_crud_hapus__WEBPACK_IMPORTED_MODULE_2__["default"])(id);
+      popup.remove();
+    }
+  });
 }; // showPolygon();
 
 
 if (role == "admin") {
   drawPolygon();
   mouseRight();
+  btnAksi();
 }
 
 

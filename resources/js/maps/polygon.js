@@ -4,6 +4,7 @@ import { getDataPolygon } from "../getData";
 import swalDelete from "../my_crud/hapus";
 
 const list_koordinat = document.getElementById("list-koordinat");
+let popup;
 
 div_map.style.height = "80vh";
 map.setCenter([140.47879036870296, -2.668376578653124]);
@@ -84,8 +85,21 @@ map.on("mouseleave", "area-layer", () => {
 // when mouse click right
 const mouseRight = () => {
     map.on("contextmenu", "area-layer", (e) => {
+        if (popup) popup.remove();
         const href = e.features[0].properties.id;
-        swalDelete(href);
+        const menu = `<div class="list-group my-group">
+                        <span role="button" data-id="${href}" class="btn-ubah list-group-item list-group-item-action list-group-item-warning">Ubah</span>
+                        <span role="button" data-id="${href}" class="hapus-peta list-group-item list-group-item-action list-group-item-danger">Hapus</span>
+                    </div>`;
+        // create popup
+        popup = new mapboxgl.Popup({
+            offset: [0, -15],
+            anchor: "right",
+        })
+            .setLngLat(e.lngLat)
+            .setHTML(menu)
+            .addTo(map);
+        // remove popup when click outside
     });
 };
 
@@ -162,7 +176,6 @@ const inputKoordinat = (data, draw) => {
     });
     draw.deleteAll();
 };
-
 // show popup
 const showPopup = (item, e) => {
     let show = "";
@@ -185,13 +198,29 @@ const showPopup = (item, e) => {
                     </tr>
                 </table>`;
     }
-    new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(map);
+    popup = new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(map);
+};
+
+const btnAksi = () => {
+    // click body and find ubah peta
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("btn-ubah")) {
+            popup.remove();
+            // swalUbah(data);
+        }
+        if (e.target.classList.contains("hapus-peta")) {
+            const id = e.target.dataset.id;
+            swalDelete(id);
+            popup.remove();
+        }
+    });
 };
 
 // showPolygon();
 if (role == "admin") {
     drawPolygon();
     mouseRight();
+    btnAksi();
 }
 
 export { refreshMap, list_koordinat };

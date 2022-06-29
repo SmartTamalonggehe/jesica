@@ -9,7 +9,7 @@
              </div>
              <form id="formKu" class="tooltip-end-top">
                  @csrf
-                 <input type="hidden" class="inputReset" name="id_form" id="id_form">
+                 <input type="hidden" class="inputReset" name="id" id="id_form">
                  <input type="hidden" name="jenis" id="jenis" value="polygon">
                  <div class="modal-body">
                      <div class="row">
@@ -31,7 +31,7 @@
                              <div class="mb-3">
                                  <label for="warna">Warna</label>
                                  <input type="color" class="form-control inputReset" name="warna" id="warna"
-                                     value="#ff0000" required />
+                                     value="#00bbfa" required />
                              </div>
                          </div>
                          <div class="col-6">

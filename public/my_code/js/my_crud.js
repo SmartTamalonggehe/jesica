@@ -2276,13 +2276,8 @@ if (formKu) {
     e.preventDefault(); // get data from form with serialize
 
     var formData = $(this).serialize();
-    var data = formData; // get data from form
-    // const formData = new FormData(this);
-    // data={}
-    // formData.forEach(function (value, key) {
-    //     data[key] = value;
-    // });
-
+    var data = formData;
+    var id_form = document.getElementById("id_form").value;
     var method;
     var url;
 
@@ -2291,7 +2286,7 @@ if (formKu) {
       url = "/crud/".concat(route);
     } else {
       method = "put";
-      url = "/crud/".concat(route, "/").concat(data.id);
+      url = "/crud/".concat(route, "/").concat(id_form);
     }
 
     axios__WEBPACK_IMPORTED_MODULE_0___default()({
@@ -2383,7 +2378,6 @@ __webpack_require__.r(__webpack_exports__);
 $(document).on("click", ".btn-ubah", function (e) {
   e.preventDefault();
   var href = $(this).data("id");
-  console.log(href);
   axios({
     method: "get",
     url: "/crud/".concat(route, "/").concat(href, "/edit")
@@ -2414,6 +2408,14 @@ var formData = function formData(data) {
     $("#tutupan-id").val(data.tutupan_id).trigger("change");
     document.getElementById("luas").value = data.luas;
     document.getElementById("presentase").value = data.presentase;
+  }
+
+  if (route == "kawasan") {
+    document.getElementById("id_form").value = data.id;
+    document.getElementById("kd_kawasan").value = data.kd_kawasan;
+    document.getElementById("nm_kawasan").value = data.nm_kawasan;
+    document.getElementById("warna").value = data.warna;
+    document.getElementById("luas").value = data.luas;
   } // if (route == "nilai") {
   //     document.getElementById("id_form").value = data.id;
   //     $("#student-id").val(data.student_id).trigger("change");

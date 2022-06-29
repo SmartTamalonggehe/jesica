@@ -28,7 +28,7 @@
                 <div class="page-header page-header-light">
                     <div class="page-header-content header-elements-lg-inline">
                         <div class="page-title d-flex">
-                            <h4><span class="font-weight-semibold text-uppercase"></h4></span>
+                            <h4><span class="font-weight-semibold text-uppercase">@yield('judul')</h4></span>
                             <a href="#" class="header-elements-toggle text-body d-lg-none"><i
                                     class="icon-more"></i></a>
                         </div>

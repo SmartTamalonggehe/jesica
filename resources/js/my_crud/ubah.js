@@ -3,7 +3,6 @@ import { setSaveMethod } from "./tools";
 $(document).on("click", ".btn-ubah", function (e) {
     e.preventDefault();
     const href = $(this).data("id");
-    console.log(href);
     axios({
         method: "get",
         url: `/crud/${route}/${href}/edit`,
@@ -35,6 +34,13 @@ const formData = (data) => {
         $("#tutupan-id").val(data.tutupan_id).trigger("change");
         document.getElementById("luas").value = data.luas;
         document.getElementById("presentase").value = data.presentase;
+    }
+    if (route == "kawasan") {
+        document.getElementById("id_form").value = data.id;
+        document.getElementById("kd_kawasan").value = data.kd_kawasan;
+        document.getElementById("nm_kawasan").value = data.nm_kawasan;
+        document.getElementById("warna").value = data.warna;
+        document.getElementById("luas").value = data.luas;
     }
     // if (route == "nilai") {
     //     document.getElementById("id_form").value = data.id;

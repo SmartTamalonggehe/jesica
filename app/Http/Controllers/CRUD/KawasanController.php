@@ -13,13 +13,17 @@ class KawasanController extends Controller
     // validation
     protected function spartaValidation($request, $id = "")
     {
+        $required = 'required';
+        if ($id) {
+            $required = '';
+        }
         $rules = [
             'nm_kawasan' => 'required',
             'warna' => 'required',
             'luas' => 'required',
             // minumum array
-            'longitude' => 'required|min:3',
-            'latitude' => 'required',
+            'longitude' => "$required|min:3",
+            'latitude' => "$required|min:3",
         ];
 
 
@@ -108,7 +112,8 @@ class KawasanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Kawasan::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -120,7 +125,20 @@ class KawasanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data_req = $request->all();
+        $validate = $this->spartaValidation($data_req, $id);
+        if ($validate) {
+            return $validate;
+        }
+        $data = Kawasan::find($request->id);
+        $data_req = $request->except(['jenis']);
+        $data->update($data_req);
+        $pesan = [
+            'judul' => 'Berhasil',
+            'pesan' => 'Data Telah Diubah',
+            'type' => 'success'
+        ];
+        return response()->json($pesan);
     }
 
     /**
