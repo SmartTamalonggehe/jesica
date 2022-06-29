@@ -2207,6 +2207,35 @@ if (list_koordinat) {
 
 /***/ }),
 
+/***/ "./resources/js/components/logout.js":
+/*!*******************************************!*\
+  !*** ./resources/js/components/logout.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var click_logout = document.getElementById("click-logout");
+
+var handleLogout = function handleLogout() {
+  click_logout.addEventListener("click", function () {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post("/logout").then(function (res) {
+      window.location.href = "/";
+    })["catch"](function (err) {
+      console.log(err);
+    });
+  });
+};
+
+if (click_logout) {
+  handleLogout();
+}
+
+/***/ }),
+
 /***/ "./resources/js/components/nav-bar.js":
 /*!********************************************!*\
   !*** ./resources/js/components/nav-bar.js ***!
@@ -2733,6 +2762,8 @@ __webpack_require__(/*! ./components/list_koordinat */ "./resources/js/component
 __webpack_require__(/*! ./components/select-kawasan */ "./resources/js/components/select-kawasan.js");
 
 __webpack_require__(/*! ./components/select-tutupan */ "./resources/js/components/select-tutupan.js");
+
+__webpack_require__(/*! ./components/logout */ "./resources/js/components/logout.js");
 })();
 
 /******/ })()
