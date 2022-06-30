@@ -2416,15 +2416,7 @@ var formData = function formData(data) {
     document.getElementById("nm_kawasan").value = data.nm_kawasan;
     document.getElementById("warna").value = data.warna;
     document.getElementById("luas").value = data.luas;
-  } // if (route == "nilai") {
-  //     document.getElementById("id_form").value = data.id;
-  //     $("#student-id").val(data.student_id).trigger("change");
-  //     document.getElementById("UTS").value = data.UTS;
-  //     document.getElementById("UAS").value = data.UAS;
-  //     document.getElementById("total").value = data.total;
-  //     document.getElementById("grade").value = data.grade;
-  // }
-
+  }
 };
 
 /***/ }),

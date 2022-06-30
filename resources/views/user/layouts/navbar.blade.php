@@ -16,7 +16,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="#" class="navbar-nav-link">
+                <a href="{{ route('user.kawasan-tutupan') }}" class="navbar-nav-link">
                     <i class="icon-paragraph-justify3 mr-2"></i>
                     Kawasan Tutupan
                 </a>

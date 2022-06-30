@@ -29,10 +29,6 @@ $folder = 'kawasan';
     <div id="route" style="display: none"><?= $folder ?></div>
     <button id="refresh" style="display: none">Refresh</button>
     <div class="card">
-        {{-- <div class="card-header">
-            <h5 class="card-title">Polygon</h5>
-        </div> --}}
-
         <div class="card-body">
             <div id="map"></div>
         </div>

@@ -21,6 +21,10 @@ Route::get('kawasan', function () {
     return view('user.kawasan.index');
 })->name('user.kawasan');
 
+Route::get('kawasan-tutupan', function () {
+    return view('user.kawasan-tutupan.index');
+})->name('user.kawasan-tutupan');
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/crud.php';

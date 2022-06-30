@@ -4,6 +4,10 @@
     text-align: right;
     padding-right: 5px;
 }
+
+table.table thead th {
+    font-weight: bold;
+}
 /* menu */
 .list-group.my-group {
     width: 100px;

@@ -4,7 +4,6 @@ const getDataPolygon = () => {
     return axios
         .get(`/api/${route}/polygon`)
         .then((res) => {
-            console.log(res.data);
             return res.data;
         })
         .catch((err) => {
@@ -16,7 +15,6 @@ const getDataKawasan = () => {
     return axios
         .get(`/api/kawasan`)
         .then((res) => {
-            console.log(res.data);
             return res.data;
         })
         .catch((err) => {
@@ -28,7 +26,6 @@ const getDataTutupan = () => {
     return axios
         .get(`/api/tutupan`)
         .then((res) => {
-            console.log(res.data);
             return res.data;
         })
         .catch((err) => {
@@ -36,4 +33,20 @@ const getDataTutupan = () => {
         });
 };
 
-export { getDataPolygon, getDataKawasan, getDataTutupan };
+const getDataKawasanTutupan = ($by = "", $id = "") => {
+    return axios
+        .get(`/api/kawasan-tutupan/${$by}/${$id}`)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+
+export {
+    getDataPolygon,
+    getDataKawasan,
+    getDataTutupan,
+    getDataKawasanTutupan,
+};

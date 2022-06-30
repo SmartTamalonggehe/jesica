@@ -43,10 +43,6 @@ $folder = 'login';
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                     </div>
-
-                    <div class="text-center">
-                        <a href="login_password_recover.html">Forgot password?</a>
-                    </div>
                 </div>
             </div>
         </form>

@@ -33,4 +33,6 @@ Route::get('tutupan', [TutupanAPI::class, 'index'])->name('tutupan.index');
 
 Route::controller(KawasanTutupanAPI::class)->prefix('kawasan-tutupan')->group(function () {
     Route::get('/', 'index')->name('kawasan-tutupan.index');
+    Route::get('kawasan/{id}', 'byKawasan')->name('kawasan-tutupan.by-kawasan');
+    Route::get('tutupan/{id}', 'byTutupan')->name('kawasan-tutupan.by-tutupan');
 });

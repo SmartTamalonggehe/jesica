@@ -13,4 +13,14 @@ class KawasanTutupanAPI extends Controller
         $data = KawasanTutupan::with('tutupan', 'kawasan')->get();
         return response()->json($data);
     }
+    public function byKawasan($kawasan_id)
+    {
+        $data = KawasanTutupan::where('kawasan_id', $kawasan_id)->with('tutupan', 'kawasan')->get();
+        return response()->json($data);
+    }
+    public function byTutupan($tutupan_id)
+    {
+        $data = KawasanTutupan::where('tutupan_id', $tutupan_id)->with('tutupan', 'kawasan')->get();
+        return response()->json($data);
+    }
 }

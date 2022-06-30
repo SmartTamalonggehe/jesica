@@ -2166,6 +2166,7 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getDataKawasan": () => (/* binding */ getDataKawasan),
+/* harmony export */   "getDataKawasanTutupan": () => (/* binding */ getDataKawasanTutupan),
 /* harmony export */   "getDataPolygon": () => (/* binding */ getDataPolygon),
 /* harmony export */   "getDataTutupan": () => (/* binding */ getDataTutupan)
 /* harmony export */ });
@@ -2175,7 +2176,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var getDataPolygon = function getDataPolygon() {
   return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/".concat(route, "/polygon")).then(function (res) {
-    console.log(res.data);
     return res.data;
   })["catch"](function (err) {
     console.log(err);
@@ -2184,7 +2184,6 @@ var getDataPolygon = function getDataPolygon() {
 
 var getDataKawasan = function getDataKawasan() {
   return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/kawasan").then(function (res) {
-    console.log(res.data);
     return res.data;
   })["catch"](function (err) {
     console.log(err);
@@ -2193,7 +2192,16 @@ var getDataKawasan = function getDataKawasan() {
 
 var getDataTutupan = function getDataTutupan() {
   return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/tutupan").then(function (res) {
-    console.log(res.data);
+    return res.data;
+  })["catch"](function (err) {
+    console.log(err);
+  });
+};
+
+var getDataKawasanTutupan = function getDataKawasanTutupan() {
+  var $by = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  var $id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/kawasan-tutupan/".concat($by, "/").concat($id)).then(function (res) {
     return res.data;
   })["catch"](function (err) {
     console.log(err);
@@ -2443,7 +2451,7 @@ var showPopup = function showPopup(item, e) {
   var show = "";
 
   if (route == "kawasan") {
-    show = "<table class=\"table-popup\">\n                    <tr>\n                        <th>Kawasan:</th>\n                        <td>".concat(item.nm_kawasan, "</td>\n                    </tr>\n                    <tr>\n                        <th>Luas:</th>\n                        <td>").concat(item.luas, "</td>\n                    </tr>\n                    <tr>\n                        <td colspan=\"2\">\n                            <p class=\"text-center mt-2\">\n                                <a href=\"#\" target=\"_blank\">Kawasan Tutupan</a>\n                            </p>\n                        </td>\n                    </tr>\n                </table>");
+    show = "<table class=\"table-popup\">\n                    <tr>\n                        <th>Kawasan:</th>\n                        <td>".concat(item.nm_kawasan, "</td>\n                    </tr>\n                    <tr>\n                        <th>Luas:</th>\n                        <td>").concat(item.luas, "</td>\n                    </tr>\n                    <tr>\n                        <td colspan=\"2\">\n                            <p class=\"text-center mt-2\">\n                                <a href=\"javascript:void(0)\" class='modal-kawasan' data-id='").concat(item.id, "'>Kawasan Tutupan</a>\n                            </p>\n                        </td>\n                    </tr>\n                </table>");
   }
 
   popup = new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(show).addTo(_init__WEBPACK_IMPORTED_MODULE_0__["default"]);

@@ -192,7 +192,7 @@ const showPopup = (item, e) => {
                     <tr>
                         <td colspan="2">
                             <p class="text-center mt-2">
-                                <a href="#" target="_blank">Kawasan Tutupan</a>
+                                <a href="javascript:void(0)" class='modal-kawasan' data-id='${item.id}'>Kawasan Tutupan</a>
                             </p>
                         </td>
                     </tr>
