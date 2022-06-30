@@ -10,12 +10,16 @@ $folder = 'dashboard';
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title">Grafik ...</h5>
+            <h5 class="card-title">Grafik Luas Kawasan</h5>
         </div>
 
         <div class="card-body">
-            Tampat Grafik
+            <div id="grafik-luas-kawasan"></div>
         </div>
 
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ mix('my_code/js/chart.js') }}"></script>
 @endsection
