@@ -13,6 +13,15 @@ document.addEventListener("click", (e) => {
 
 const showData = async ($by, $id) => {
     const response = await getDataKawasanTutupan($by, $id);
+    // if response empty
+    if (response.length === 0) {
+        if (role === "admin") {
+            alert("Data tidak ditemukan silahkan Megisi data Tutupan Kawasan");
+        } else {
+            alert("Data tidak ditemukan silahkan memilih kawasan yang lain");
+        }
+        return;
+    }
     let tableTr = "";
     response.forEach((data) => {
         tableTr += `<tr>

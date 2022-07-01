@@ -70,21 +70,30 @@ class KawasanController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $validate = $this->spartaValidation($data);
+        $data_req = $request->all();
+        $validate = $this->spartaValidation($data_req);
         if ($validate) {
             return $validate;
         }
+
+        // return $data_req;
         // change request->nm_kawasan to request->nm_koordinat
-        $data['nm_koordinat'] = $data['nm_kawasan'];
-        // return $data;
-        $koordinat = (new KoordinatController)->store($data);
+        $data_req['nm_koordinat'] = $data_req['nm_kawasan'];
+        $koordinat = (new KoordinatController)->store($data_req);
 
         (new KoordinatDetController)->store($request, $koordinat->id);
         // all request except latitude and longitude
-        $data = $request->except(['longitude', 'latitude', 'nm_koordinat', 'id_form', 'jenis']);
-        $data['koordinat_id'] = $koordinat->id;
-        Kawasan::create($data);
+        $data_req = $request->except(['longitude', 'latitude', 'nm_koordinat', 'id_form', 'jenis']);
+        $data_req['koordinat_id'] = $koordinat->id;
+        // get luas
+        $luas = $data_req['luas'];
+        // remove comma
+        $luas = str_replace(',', '', $luas);
+        // to float
+        $luas = floatval($luas);
+        $data_req['luas'] = $luas;
+
+        Kawasan::create($data_req);
         $pesan = [
             'judul' => 'Berhasil',
             'pesan' => 'Data Telah Ditambahkan',
@@ -130,8 +139,17 @@ class KawasanController extends Controller
         if ($validate) {
             return $validate;
         }
+
         $data = Kawasan::find($request->id);
         $data_req = $request->except(['jenis']);
+        // get luas
+        $luas = $data_req['luas'];
+        // remove comma
+        $luas = str_replace(',', '', $luas);
+        // to float
+        $luas = floatval($luas);
+        $data_req['luas'] = $luas;
+
         $data->update($data_req);
         $pesan = [
             'judul' => 'Berhasil',

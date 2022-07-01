@@ -2277,6 +2277,21 @@ var showData = /*#__PURE__*/function () {
 
           case 2:
             response = _context.sent;
+
+            if (!(response.length === 0)) {
+              _context.next = 6;
+              break;
+            }
+
+            if (role === "admin") {
+              alert("Data tidak ditemukan silahkan Megisi data Tutupan Kawasan");
+            } else {
+              alert("Data tidak ditemukan silahkan memilih kawasan yang lain");
+            }
+
+            return _context.abrupt("return");
+
+          case 6:
             tableTr = "";
             response.forEach(function (data) {
               tableTr += "<tr>\n                        <td>".concat(data.tutupan.nm_tutupan, "</td>\n                        <td>").concat(data.luas, "</td>\n                        <td>").concat(data.presentase, "</td>\n                    </tr>");
@@ -2287,7 +2302,7 @@ var showData = /*#__PURE__*/function () {
 
             $("#myModal").modal("show");
 
-          case 9:
+          case 12:
           case "end":
             return _context.stop();
         }

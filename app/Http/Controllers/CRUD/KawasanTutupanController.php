@@ -83,6 +83,14 @@ class KawasanTutupanController extends Controller
         if ($validate) {
             return $validate;
         }
+        // get luas
+        $luas = $data_req['luas'];
+        // remove comma
+        $luas = str_replace(',', '', $luas);
+        // to float
+        $luas = floatval($luas);
+        $data_req['luas'] = $luas;
+
         $data = KawasanTutupan::create($data_req);
         $pesan = [
             'judul' => 'Berhasil',
@@ -130,6 +138,14 @@ class KawasanTutupanController extends Controller
         if ($validate) {
             return $validate;
         }
+        // get luas
+        $luas = $data_req['luas'];
+        // remove comma
+        $luas = str_replace(',', '', $luas);
+        // to float
+        $luas = floatval($luas);
+        $data_req['luas'] = $luas;
+
         $data = KawasanTutupan::find($id);
         $data->update($data_req);
         $pesan = [
