@@ -2305,7 +2305,7 @@ var showPolygon = /*#__PURE__*/function () {
                 features.push({
                   type: "Feature",
                   properties: {
-                    id: coord.koordinat.id,
+                    id: coord.id,
                     nm_kawasan: coord.nm_kawasan,
                     luas: coord.luas,
                     color: coord.warna //coord.warna, //rgba(255, 0, 114, 0.24)
@@ -2357,6 +2357,7 @@ var showPolygon = /*#__PURE__*/function () {
 
 _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("click", "area-layer", function (e) {
   var item = e.features[0].properties;
+  console.log(item);
   showPopup(item, e);
 }); // Change the cursor to a pointer when
 // the mouse is over the area layer.

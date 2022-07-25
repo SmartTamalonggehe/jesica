@@ -16,7 +16,7 @@ const showData = async ($by, $id) => {
     // if response empty
     if (response.length === 0) {
         if (role === "admin") {
-            alert("Data tidak ditemukan silahkan Megisi data Tutupan Kawasan");
+            alert("Data tidak ditemukan silahkan Mengisi data Tutupan Kawasan");
         } else {
             alert("Data tidak ditemukan silahkan memilih kawasan yang lain");
         }

@@ -28,7 +28,7 @@ const showPolygon = async () => {
             features.push({
                 type: "Feature",
                 properties: {
-                    id: coord.koordinat.id,
+                    id: coord.id,
                     nm_kawasan: coord.nm_kawasan,
                     luas: coord.luas,
                     color: coord.warna, //coord.warna, //rgba(255, 0, 114, 0.24)
@@ -68,6 +68,7 @@ const showPolygon = async () => {
 // HTML from the click event's properties.
 map.on("click", "area-layer", (e) => {
     const item = e.features[0].properties;
+    console.log(item);
     showPopup(item, e);
 });
 

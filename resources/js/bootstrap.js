@@ -9,7 +9,7 @@ try {
     require("select2");
     $(".select2_basic").select2({
         tags: true,
-        dropdownParent: $(".tampilModal"),
+        dropdownParent: $(".modal"),
         width: "100%",
         theme: "bootstrap",
     });
