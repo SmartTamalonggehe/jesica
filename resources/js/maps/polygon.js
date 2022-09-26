@@ -32,6 +32,7 @@ const showPolygon = async () => {
                     nm_kawasan: coord.nm_kawasan,
                     luas: coord.luas,
                     color: coord.warna, //coord.warna, //rgba(255, 0, 114, 0.24)
+                    koordinat_id: coord.koordinat_id,
                 },
                 geometry: {
                     type: "Polygon",
@@ -87,10 +88,10 @@ map.on("mouseleave", "area-layer", () => {
 const mouseRight = () => {
     map.on("contextmenu", "area-layer", (e) => {
         if (popup) popup.remove();
-        const href = e.features[0].properties.id;
+        const href = e.features[0].properties;
         const menu = `<div class="list-group my-group">
-                        <span role="button" data-id="${href}" class="btn-ubah list-group-item list-group-item-action list-group-item-warning">Ubah</span>
-                        <span role="button" data-id="${href}" class="hapus-peta list-group-item list-group-item-action list-group-item-danger">Hapus</span>
+                        <span role="button" data-id="${href.id}" class="btn-ubah list-group-item list-group-item-action list-group-item-warning">Ubah</span>
+                        <span role="button" data-id="${href.koordinat_id}" class="hapus-peta list-group-item list-group-item-action list-group-item-danger">Hapus</span>
                     </div>`;
         // create popup
         popup = new mapboxgl.Popup({

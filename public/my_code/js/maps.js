@@ -2308,8 +2308,9 @@ var showPolygon = /*#__PURE__*/function () {
                     id: coord.id,
                     nm_kawasan: coord.nm_kawasan,
                     luas: coord.luas,
-                    color: coord.warna //coord.warna, //rgba(255, 0, 114, 0.24)
-
+                    color: coord.warna,
+                    //coord.warna, //rgba(255, 0, 114, 0.24)
+                    koordinat_id: coord.koordinat_id
                   },
                   geometry: {
                     type: "Polygon",
@@ -2374,8 +2375,8 @@ _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("mouseleave", "area-layer", fun
 var mouseRight = function mouseRight() {
   _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("contextmenu", "area-layer", function (e) {
     if (popup) popup.remove();
-    var href = e.features[0].properties.id;
-    var menu = "<div class=\"list-group my-group\">\n                        <span role=\"button\" data-id=\"".concat(href, "\" class=\"btn-ubah list-group-item list-group-item-action list-group-item-warning\">Ubah</span>\n                        <span role=\"button\" data-id=\"").concat(href, "\" class=\"hapus-peta list-group-item list-group-item-action list-group-item-danger\">Hapus</span>\n                    </div>"); // create popup
+    var href = e.features[0].properties;
+    var menu = "<div class=\"list-group my-group\">\n                        <span role=\"button\" data-id=\"".concat(href.id, "\" class=\"btn-ubah list-group-item list-group-item-action list-group-item-warning\">Ubah</span>\n                        <span role=\"button\" data-id=\"").concat(href.koordinat_id, "\" class=\"hapus-peta list-group-item list-group-item-action list-group-item-danger\">Hapus</span>\n                    </div>"); // create popup
 
     popup = new mapboxgl.Popup({
       offset: [0, -15],
