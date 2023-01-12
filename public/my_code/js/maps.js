@@ -2284,16 +2284,40 @@ _init__WEBPACK_IMPORTED_MODULE_0__["default"].on("load", function () {
 
 var showPolygon = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var data, coordinates, features;
+    var queryString, data_url, data, ambil, coordinates, features;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
+            queryString = window.location.search;
+            data_url = JSON.parse(new URLSearchParams(queryString).get("koordinat_id"));
+            data = [];
+
+            if (!((data_url === null || data_url === void 0 ? void 0 : data_url.length) > 0)) {
+              _context.next = 11;
+              break;
+            }
+
+            _context.next = 6;
             return (0,_getData__WEBPACK_IMPORTED_MODULE_1__.getDataPolygon)();
 
-          case 2:
+          case 6:
+            ambil = _context.sent;
+            data = ambil.filter(function (item) {
+              return data_url.includes(item.koordinat_id);
+            });
+            console.log(data);
+            _context.next = 14;
+            break;
+
+          case 11:
+            _context.next = 13;
+            return (0,_getData__WEBPACK_IMPORTED_MODULE_1__.getDataPolygon)();
+
+          case 13:
             data = _context.sent;
+
+          case 14:
             coordinates = [];
             features = []; // if data exist
 
@@ -2340,7 +2364,7 @@ var showPolygon = /*#__PURE__*/function () {
               }
             });
 
-          case 8:
+          case 19:
           case "end":
             return _context.stop();
         }

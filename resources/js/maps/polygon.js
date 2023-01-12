@@ -15,7 +15,19 @@ map.on("load", () => {
     showPolygon();
 });
 const showPolygon = async () => {
-    const data = await getDataPolygon();
+    const queryString = window.location.search;
+    const data_url = JSON.parse(
+        new URLSearchParams(queryString).get("koordinat_id")
+    );
+    let data = [];
+    if (data_url?.length > 0) {
+        const ambil = await getDataPolygon();
+        data = ambil.filter((item) => data_url.includes(item.koordinat_id));
+        console.log(data);
+    } else {
+        data = await getDataPolygon();
+    }
+
     let coordinates = [];
     const features = [];
 

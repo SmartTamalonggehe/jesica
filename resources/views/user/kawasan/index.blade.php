@@ -1,12 +1,10 @@
 @extends('user.layouts.default')
 
 @php
-$folder = 'kawasan';
+    $folder = 'kawasan';
 @endphp
 
 @section('css')
-    {{-- my style --}}
-    <link rel="stylesheet" href="{{ mix('my_code/css/app.css') }}">
     {{-- Maps --}}
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css' rel='stylesheet' />

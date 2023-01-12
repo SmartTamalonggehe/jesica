@@ -13,5 +13,7 @@
     <link href="{{ asset('global_assets/css/icons/icomoon/styles.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('layout_4/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
+    {{-- my style --}}
+    <link rel="stylesheet" href="{{ mix('my_code/css/app.css') }}">
     @yield('css')
 </head>

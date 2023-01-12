@@ -21,4 +21,12 @@ class KawasanAPI extends Controller
         }])->get();
         return response()->json($data);
     }
+
+    public function filter()
+    {
+        $data = Kawasan::with(['koordinat' => function ($koordinat) {
+            $koordinat->with('koordinatDet');
+        }])->get();
+        return response()->json($data);
+    }
 }

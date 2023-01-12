@@ -22,11 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('polygon', [PolygonAPI::class, 'index'])->name('polygon.index');
+Route::prefix('polygon')->group(function () {
+    Route::get('/', [PolygonAPI::class, 'index'])->name('polygon.index');
+});
 
 Route::controller(KawasanAPI::class)->prefix('kawasan')->group(function () {
     Route::get('/', 'index')->name('kawasan.index');
     Route::get('polygon', 'polygon')->name('kawasan.polygon');
+    Route::get('filter', 'filter')->name('kawasan.filter');
 });
 
 Route::get('tutupan', [TutupanAPI::class, 'index'])->name('tutupan.index');

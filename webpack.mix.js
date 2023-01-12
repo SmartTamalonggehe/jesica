@@ -29,6 +29,7 @@ mix.disableSuccessNotifications();
 mix.js("resources/js/app.js", "public/my_code/js")
     .js("resources/js/chart.js", "public/my_code/js")
     .js("resources/js/my_crud.js", "public/my_code/js")
+    .js("resources/js/user.js", "public/user/js")
     .js("resources/js/maps.js", "public/my_code/js")
     .js("resources/js/components.js", "public/my_code/js")
     .postCss("resources/css/app.css", "public/my_code/css");

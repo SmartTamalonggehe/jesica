@@ -12,3 +12,24 @@ table.table thead th {
 .list-group.my-group {
     width: 100px;
 }
+
+.my-hover:hover {
+    background-color: rgb(185, 187, 187);
+    border-radius: 10px 0px;
+    color: aliceblue;
+}
+
+#kawasan a:link {
+    color: #333;
+}
+#kawasan a:visited {
+    color: #333;
+}
+
+#kawasan a:active {
+    color: #333;
+}
+
+#kawasan a:hover {
+    color: aliceblue;
+}

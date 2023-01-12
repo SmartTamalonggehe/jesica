@@ -6,4 +6,6 @@
  <script src="{{ asset('layout_4/js/app.js') }}"></script>
  <!-- /theme JS files -->
  <script src="{{ mix('my_code/js/components.js') }}" defer></script>
+ {{-- user --}}
+ <script src="{{ mix('user/js/user.js') }}"></script>
  @yield('scripts')
