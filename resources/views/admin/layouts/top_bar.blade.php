@@ -6,7 +6,7 @@
     </div>
 
     <div class="navbar-brand text-center text-lg-left">
-        <h4>Pemantauan Hutan Dikota Jayapura </h4>
+        <h4>Penyebaran Hutan Dikota Jayapura </h4>
     </div>
 
     <div class="collapse navbar-collapse order-2 order-lg-1" id="navbar-mobile">
