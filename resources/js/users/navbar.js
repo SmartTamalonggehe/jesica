@@ -19,17 +19,17 @@ const menuKawasan = async () => {
         }, {});
 
     let groupedArr = Object.values(grouped);
-    let isiMenu = `<div class="col-6 -m-3">
+    let isiMenu = `<div class="col-12 -m-3">
                             <a href="/kawasan">
-                                <p class="my-hover p-2 cursor-pointer">
+                                <p class="my-hover cursor-pointer">
                                     Keseluruhan
                                 </p>
                             </a>
                     </div>`;
     groupedArr.forEach((group) => {
         const koordinat_id = group.map((item) => item.koordinat_id);
-        isiMenu += ` <div class="col-6 -m-3">
-                        <p class="text-wrap text-capitalize cursor-pointer my-hover p-2 my-click" data-array=[${koordinat_id}]>
+        isiMenu += ` <div class="col-12 -m-3">
+                        <p class="text-wrap text-capitalize cursor-pointer my-hover my-click" data-array=[${koordinat_id}]>
                             ${group[0].nm_kawasan}
                         </p>
                     </div>`;
