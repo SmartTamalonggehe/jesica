@@ -3,7 +3,7 @@ const kawasan = document.getElementById("kawasan");
 const menu_kawasan = document.getElementById("menu-kawasan");
 const menu_navbar = document.getElementById("menu-navbar");
 const menuKawasan = async () => {
-    const polygon = await getDataKawasan();
+    const polygon = await getDataKawasan({});
     // convert and group
     let grouped = polygon
         .map((item) => {

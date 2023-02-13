@@ -8,8 +8,8 @@
             <div class="sidebar-section-body">
                 <div class="media">
                     <a href="#" class="mr-3">
-                        <img src="{{ asset('global_assets/images/placeholders/placeholder.jpg') }}"
-                            class="rounded-circle" alt="">
+                        <img src="{{ asset('global_assets/images/placeholders/placeholder.jpg') }}" class="rounded-circle"
+                            alt="">
                     </a>
 
                     <div class="media-body">
@@ -53,7 +53,7 @@
 
                 <li class="nav-item">
                     <a href="{{ route('admin.kawasan') }}" class="nav-link"><i class="icon-width"></i>
-                        <span>Kawasan</span>
+                        <span>Peta Penyebaran Hutan</span>
                     </a>
                 </li>
 
@@ -63,10 +63,26 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('admin.kawasan-tutupan') }}" class="nav-link"><i class="icon-width"></i>
+                <li class="nav-item nav-item-submenu">
+                    <a href="#" data-link="" class="nav-link"><i class="icon-width"></i>
                         <span>Kawasan Tutupan</span>
                     </a>
+                    <ul class="nav nav-group-sub" data-submenu-title="Form layouts">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.kawasan-tutupan', ['nm_kawasan' => 'Hutan Produksi Yang Dapat Dikonversi']) }}"
+                                class="nav-link">
+                                <span>Hutan Produksi Yang Dapat Dikonversi</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.kawasan-tutupan', ['nm_kawasan' => 'Kawasan Suaka/Pelestarian Alam']) }}"
+                                class="nav-link">
+                                <span>Kawasan Suaka/Pelestarian Alam</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
                 </li>
                 {{-- <li class="nav-item">
                     <a href="{{ route('admin.polygon') }}" class="nav-link"><i class="icon-width"></i>

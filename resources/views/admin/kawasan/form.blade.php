@@ -16,8 +16,12 @@
                          <div class="col-12">
                              <div class="mb-3">
                                  <label for="nm_kawasan">Nama Kawasan</label>
-                                 <input type="text" class="form-control inputReset" name="nm_kawasan" id="nm_kawasan"
-                                     required />
+                                 <select name="nm_kawasan" id="nm_kawasan" class="select2_basic">
+                                     <option value="Hutan Produksi Yang Dapat Dikonversi">Hutan Produksi Yang Dapat
+                                         Dikonversi</option>
+                                     <option value="Kawasan Suaka/Pelestarian Alam">Kawasan Suaka/Pelestarian Alam
+                                     </option>
+                                 </select>
                              </div>
                          </div>
                          <div class="col-3">

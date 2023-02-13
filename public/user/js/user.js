@@ -2182,8 +2182,10 @@ var getDataPolygon = function getDataPolygon() {
   });
 };
 
-var getDataKawasan = function getDataKawasan() {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/kawasan").then(function (res) {
+var getDataKawasan = function getDataKawasan(_ref) {
+  var _ref$nm_kawasan = _ref.nm_kawasan,
+      nm_kawasan = _ref$nm_kawasan === void 0 ? "" : _ref$nm_kawasan;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/kawasan?nm_kawasan=".concat(nm_kawasan)).then(function (res) {
     return res.data;
   })["catch"](function (err) {
     console.log(err);
@@ -2242,7 +2244,7 @@ var menuKawasan = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return (0,_getData__WEBPACK_IMPORTED_MODULE_0__.getDataKawasan)();
+            return (0,_getData__WEBPACK_IMPORTED_MODULE_0__.getDataKawasan)({});
 
           case 2:
             polygon = _context.sent;
@@ -2259,12 +2261,12 @@ var menuKawasan = /*#__PURE__*/function () {
               return acc;
             }, {});
             groupedArr = Object.values(grouped);
-            isiMenu = "<div class=\"col-12 -m-3\">\n                            <a href=\"/kawasan\">\n                                <p class=\"my-hover p-2 cursor-pointer\">\n                                    Keseluruhan\n                                </p>\n                            </a>\n                    </div>";
+            isiMenu = "<div class=\"col-12 -m-3\">\n                            <a href=\"/kawasan\">\n                                <p class=\"my-hover cursor-pointer\">\n                                    Keseluruhan\n                                </p>\n                            </a>\n                    </div>";
             groupedArr.forEach(function (group) {
               var koordinat_id = group.map(function (item) {
                 return item.koordinat_id;
               });
-              isiMenu += " <div class=\"col-12 -m-3\">\n                        <p class=\"text-wrap text-capitalize cursor-pointer my-hover p-2 my-click\" data-array=[".concat(koordinat_id, "]>\n                            ").concat(group[0].nm_kawasan, "\n                        </p>\n                    </div>");
+              isiMenu += " <div class=\"col-12 -m-3\">\n                        <p class=\"text-wrap text-capitalize cursor-pointer my-hover my-click\" data-array=[".concat(koordinat_id, "]>\n                            ").concat(group[0].nm_kawasan, "\n                        </p>\n                    </div>");
             });
             kawasan.innerHTML = isiMenu; // cari my click
 

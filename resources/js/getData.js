@@ -11,9 +11,9 @@ const getDataPolygon = () => {
         });
 };
 
-const getDataKawasan = () => {
+const getDataKawasan = ({ nm_kawasan = "" }) => {
     return axios
-        .get(`/api/kawasan`)
+        .get(`/api/kawasan?nm_kawasan=${nm_kawasan}`)
         .then((res) => {
             return res.data;
         })

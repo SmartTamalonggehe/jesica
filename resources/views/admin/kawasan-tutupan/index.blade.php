@@ -1,7 +1,8 @@
 @extends('admin.layouts.default')
 
 @php
-$folder = 'kawasan-tutupan';
+    $folder = 'kawasan-tutupan';
+    $data_url = app('request')->input('nm_kawasan');
 @endphp
 
 @section('css')
@@ -9,7 +10,7 @@ $folder = 'kawasan-tutupan';
     <link rel="stylesheet" href="{{ mix('my_code/css/app.css') }}">
 @endsection
 
-@section('judul', ucfirst($folder))
+@section('judul', ucfirst($data_url))
 
 @section('btn-top-right')
     <button type="button" class="btn btn-outline-primary" id="tambah">Tambah
@@ -18,6 +19,7 @@ $folder = 'kawasan-tutupan';
 
 @section('content')
     <div id="route" style="display: none"><?= $folder ?></div>
+    <div id="nm_kawasan" style="display: none">{{ $data_url }}</div>
     <div class="card">
         <div class="card-body">
             <h3>Silahkan mengisi, merubah dan menghapus data tutupan</h3>
@@ -52,7 +54,7 @@ $folder = 'kawasan-tutupan';
                 order: [
                     [1, 'asc']
                 ],
-                ajax: `/crud/${route}`,
+                ajax: `/crud/${route}?nm_kawasan=${nm_kawasan}`,
                 columns: [{
                         data: 'DT_RowIndex',
                         orderable: false,

@@ -62,6 +62,12 @@
             route = route.textContent
         }
         const role = 'user';
+
+        let nm_kawasan = document.getElementById('nm_kawasan')
+        if (nm_kawasan) {
+            nm_kawasan = nm_kawasan.textContent
+        }
+        // console.log('nama kawasan', nm_kawasan);
     </script>
 
     @include('user.layouts.scripts')

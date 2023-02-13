@@ -70,6 +70,10 @@
             route = route.textContent
         }
         const role = 'admin';
+        let nm_kawasan = document.getElementById('nm_kawasan')
+        if (nm_kawasan) {
+            nm_kawasan = nm_kawasan.textContent
+        }
     </script>
 
     @include('admin.layouts.scripts')

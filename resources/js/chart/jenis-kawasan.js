@@ -4,11 +4,31 @@ import { getDataKawasan } from "../getData";
 
 const grafikLuasKawasan = async () => {
     const dataKawasan = await getDataKawasan({});
+
+    // group by nm_kawasan
+    let grouped = dataKawasan
+        .map((item) => {
+            item.nm_kawasan = item.nm_kawasan.toLowerCase();
+            return item;
+        })
+        .reduce((acc, item) => {
+            if (!acc[item.nm_kawasan]) {
+                acc[item.nm_kawasan] = [];
+            }
+            acc[item.nm_kawasan].push(item);
+            return acc;
+        }, {});
+
+    // console.log(grouped);
+
+    let groupedArr = Object.values(grouped);
+
     const data = [];
     const categories = [];
-    dataKawasan.forEach((el) => {
-        data.push(el.luas);
-        categories.push(el.nm_kawasan);
+
+    groupedArr.forEach((group) => {
+        data.push(group.length);
+        categories.push(group[0].nm_kawasan);
     });
     const options = {
         series: [
@@ -45,10 +65,13 @@ const grafikLuasKawasan = async () => {
                 },
             },
         },
+        theme: {
+            palette: "palette8", // upto palette10
+        },
     };
 
     const chart = new ApexCharts(
-        document.querySelector("#grafik-luas-kawasan"),
+        document.querySelector("#grafik-jenis-kawasan"),
         options
     );
     chart.render();

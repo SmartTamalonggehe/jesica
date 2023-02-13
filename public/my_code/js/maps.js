@@ -2182,8 +2182,10 @@ var getDataPolygon = function getDataPolygon() {
   });
 };
 
-var getDataKawasan = function getDataKawasan() {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/kawasan").then(function (res) {
+var getDataKawasan = function getDataKawasan(_ref) {
+  var _ref$nm_kawasan = _ref.nm_kawasan,
+      nm_kawasan = _ref$nm_kawasan === void 0 ? "" : _ref$nm_kawasan;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/kawasan?nm_kawasan=".concat(nm_kawasan)).then(function (res) {
     return res.data;
   })["catch"](function (err) {
     console.log(err);

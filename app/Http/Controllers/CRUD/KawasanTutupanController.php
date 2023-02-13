@@ -42,9 +42,14 @@ class KawasanTutupanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = KawasanTutupan::with('tutupan', 'kawasan')->get();
+        $nm_kawasan = $request->nm_kawasan;
+        $data = KawasanTutupan::with('tutupan', 'kawasan')
+            ->whereHas('kawasan', function ($kawasan) use ($nm_kawasan) {
+                $kawasan->where('nm_kawasan', 'like', "%$nm_kawasan");
+            })
+            ->get();
         return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn(

@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 
 class KawasanAPI extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $data = Kawasan::orderBy('nm_kawasan')->get();
+        $nm_kawasan = $request->nm_kawasan;
+        $data = Kawasan::orderBy('nm_kawasan')
+            ->where('nm_kawasan', 'like', "%$nm_kawasan%")
+            ->get();
         return response()->json($data);
     }
 

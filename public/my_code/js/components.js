@@ -2327,7 +2327,7 @@ var nav_bar = document.querySelector(".navbar-nav");
 
 var selector = function selector() {
   // select a in nav-item and add class active if it's the current page
-  var nav_items = document.querySelectorAll(".nav-item a");
+  var nav_items = document.querySelectorAll(".nav-item");
   var location = window.location.href;
   nav_items.forEach(function (item) {
     if (item.href === location) {
@@ -2354,7 +2354,6 @@ var selector = function selector() {
 
 if (nav_bar) {
   selector();
-  console.log("nav-bar loaded");
 }
 
 /***/ }),
@@ -2392,13 +2391,15 @@ var selectKawasan = /*#__PURE__*/function () {
             }
 
             _context.next = 3;
-            return (0,_getData__WEBPACK_IMPORTED_MODULE_0__.getDataKawasan)();
+            return (0,_getData__WEBPACK_IMPORTED_MODULE_0__.getDataKawasan)({
+              nm_kawasan: nm_kawasan
+            });
 
           case 3:
             dataKawasan = _context.sent;
             kawasan_id.innerHTML = "<option value=\"\" disabled selected>Pilih Kawasan</option>";
             dataKawasan.forEach(function (kawasan) {
-              kawasan_id.innerHTML += "\n                <option value=\"".concat(kawasan.id, "\">").concat(kawasan.nm_kawasan, "</option>\n            ");
+              kawasan_id.innerHTML += "\n                <option value=\"".concat(kawasan.id, "\">").concat(kawasan.kd_kawasan, " - ").concat(kawasan.nm_kawasan, "</option>\n            ");
             });
 
           case 6:
@@ -2544,8 +2545,10 @@ var getDataPolygon = function getDataPolygon() {
   });
 };
 
-var getDataKawasan = function getDataKawasan() {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/kawasan").then(function (res) {
+var getDataKawasan = function getDataKawasan(_ref) {
+  var _ref$nm_kawasan = _ref.nm_kawasan,
+      nm_kawasan = _ref$nm_kawasan === void 0 ? "" : _ref$nm_kawasan;
+  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/kawasan?nm_kawasan=".concat(nm_kawasan)).then(function (res) {
     return res.data;
   })["catch"](function (err) {
     console.log(err);

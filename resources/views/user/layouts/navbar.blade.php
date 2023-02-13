@@ -13,7 +13,7 @@
                     <i class="icon-indent-decrease2 mr-2"></i> Peta Kawasan
                 </div>
                 <div class="my-menu" style="top: 55px; position: absolute; display: none">
-                    <div class="card" style="width: 500px">
+                    <div class="card" style="width: 300px">
                         <div class="card-body overflow-auto">
                             <div class="row" id='kawasan'>
 

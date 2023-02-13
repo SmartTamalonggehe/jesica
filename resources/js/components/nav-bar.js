@@ -2,7 +2,7 @@ const nav_bar = document.querySelector(".navbar-nav");
 
 const selector = () => {
     // select a in nav-item and add class active if it's the current page
-    const nav_items = document.querySelectorAll(".nav-item a");
+    const nav_items = document.querySelectorAll(".nav-item");
     const location = window.location.href;
 
     nav_items.forEach((item) => {
@@ -28,5 +28,4 @@ const selector = () => {
 
 if (nav_bar) {
     selector();
-    console.log("nav-bar loaded");
 }
